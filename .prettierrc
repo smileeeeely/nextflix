@@ -8,5 +8,6 @@
   "printWidth": 120,
   "useTabs": false,
   "bracketSpacing": true,
-  "quoteProps": "preserve"
+  "quoteProps": "preserve",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
