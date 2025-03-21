@@ -1,1 +1,3 @@
-export const formatOverview = (overview: string): string => overview.replace(/(?<!\.)\.(?!\.)/g, '.\n');
+export const formatOverview = (overview: string): string => {
+  return overview.replace(/(?<!\.)\.(?!\.)/g, '.\n');
+};
