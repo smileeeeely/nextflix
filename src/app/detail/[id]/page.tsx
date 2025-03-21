@@ -23,7 +23,7 @@ const mokData = {
       'name': '모험',
     },
   ],
-  'homepage': '',
+  'homepage': 'https://www.recodelog.com/blog/next/image-component',
   'id': 696506,
   'imdb_id': 'tt12299608',
   'origin_country': ['GB', 'US'],
