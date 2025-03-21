@@ -1,11 +1,16 @@
-type Props = {
+import Poster from '@/components/detail/Poster';
+interface Props {
   params: {
     id: string;
   };
-};
+}
 
 const DetailPage = ({ params }: Props) => {
-  return <div></div>;
+  return (
+    <main>
+      <Poster src={mokData.poster_path} alt={mokData.title}></Poster>
+    </main>
+  );
 };
 
 export default DetailPage;
