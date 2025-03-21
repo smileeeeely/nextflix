@@ -1,5 +1,8 @@
+'use client';
+
 import Poster from '@/components/detail/Poster';
 import Info from '@/components/detail/Info';
+import { useEffect } from 'react';
 
 const mokData = {
   'adult': false,
@@ -99,6 +102,15 @@ interface Props {
 }
 
 const DetailPage = ({ params }: Props) => {
+  useEffect(() => {
+    const dataFetch = async () => {
+      // TODO: 실제 data fetching 로직 구현
+      const data = () => {
+        console.log(params.id);
+      };
+    };
+    dataFetch();
+  }, []);
   return (
     <main>
       <Poster src={src} alt={mokData.title}></Poster>
