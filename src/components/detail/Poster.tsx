@@ -1,16 +1,14 @@
 import Image from 'next/image';
 
 interface Props {
-  params: {
-    src: string;
-    alt: string;
-  };
+  src: string;
+  alt: string;
 }
 
-const Poster = ({ params }: Props) => {
+const Poster = ({ src, alt }: Props) => {
   return (
     <section>
-      <Image src={params.src} fill alt={params.alt}></Image>
+      <Image src={src} fill alt={alt} />
     </section>
   );
 };
