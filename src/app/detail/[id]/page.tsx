@@ -1,19 +1,5 @@
 import Poster from '@/components/detail/Poster';
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-const DetailPage = ({ params }: Props) => {
-  return (
-    <main>
-      <Poster src={mokData.poster_path} alt={mokData.title}></Poster>
-    </main>
-  );
-};
-
-export default DetailPage;
+import Info from '@/components/detail/Info';
 
 const mokData = {
   'adult': false,
@@ -103,3 +89,22 @@ const mokData = {
   'vote_average': 7,
   'vote_count': 816,
 };
+
+const src = 'https://image.tmdb.org/t/p/w300' + mokData.poster_path;
+
+interface Props {
+  params: {
+    id: string;
+  };
+}
+
+const DetailPage = ({ params }: Props) => {
+  return (
+    <main>
+      <Poster src={src} alt={mokData.title}></Poster>
+      <Info movie={mokData} />
+    </main>
+  );
+};
+
+export default DetailPage;
