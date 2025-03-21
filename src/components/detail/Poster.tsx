@@ -8,7 +8,7 @@ interface Props {
 const Poster = ({ src, alt }: Props) => {
   return (
     <section>
-      <Image src={src} fill alt={alt} />
+      <Image src={src} width={300} height={400} alt={alt} />
     </section>
   );
 };
