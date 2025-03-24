@@ -42,12 +42,16 @@ const Info = ({ movie }: Props) => {
       <section>
         <br />
         <h2 className='text-[30px]'>제작사</h2>
-        <div className='flex flex-row items-center gap-[30px]'>
+        <div className='flex flex-row items-baseline gap-[30px]'>
           {movie.production_companies.map((company) => {
             return (
-              <ul key={company.id}>
-                <Image src={IMG_PATH + company.logo_path} width={200} height={100} alt={company.name} />
-              </ul>
+              <div key={company.id}>
+                {company.logo_path ? (
+                  <Image src={IMG_PATH + company.logo_path} width={200} height={100} alt={company.name} />
+                ) : (
+                  <p>{company.name}</p>
+                )}
+              </div>
             );
           })}
         </div>
