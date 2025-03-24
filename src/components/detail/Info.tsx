@@ -5,10 +5,17 @@ import Image from 'next/image';
 import WrapperBox from '@/components/detail/WrapperBox';
 
 interface Props {
-  movie: Movie;
+  movie: Movie | null;
 }
 
 const Info = ({ movie }: Props) => {
+  if (!movie) {
+    return (
+      <main>
+        <div>Loading...</div>
+      </main>
+    );
+  }
   return (
     <section className='ml-[20px] flex flex-col'>
       {/* 한 줄 평 */}
