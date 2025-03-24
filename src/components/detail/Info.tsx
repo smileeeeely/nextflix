@@ -9,7 +9,7 @@ interface Props {
 
 const Info = ({ movie }: Props) => {
   return (
-    <main className='ml-[20px] flex flex-col'>
+    <section className='ml-[20px] flex flex-col'>
       {/* 한 줄 평 */}
       <header className='text-center text-[40px] italic'>"{movie.tagline}"</header>
       {/* 영화 이름 & 장르 내용 */}
@@ -20,39 +20,39 @@ const Info = ({ movie }: Props) => {
           // TODO: 추후 genre component 적용
           return <p key={genre.id}>{genre.name}</p>;
         })}
-        <div className='ml-[20px] flex items-baseline gap-[10px] text-[22px]'>
-          개봉일<p className='text-[18px]'>{movie.release_date}</p>
+        <ul className='ml-[20px] flex items-baseline gap-[10px] text-[22px]'>
+          개봉일<li className='text-[18px]'>{movie.release_date}</li>
           평점
-          <p className='flex flex-row items-baseline gap-[5px] text-[18px]'>
+          <li className='flex flex-row items-baseline gap-[5px] text-[18px]'>
             {movie.vote_average}
-            <p className='text-[12px]'>({movie.vote_count})</p>
-          </p>
-          런타임 <p className='text-[18px]'>{movie.runtime}분</p>
-        </div>
+            <span className='text-[12px]'>({movie.vote_count})</span>
+          </li>
+          런타임 <li className='text-[18px]'>{movie.runtime}분</li>
+        </ul>
       </section>
       {/* 영화 줄거리 */}
       <section>
         <br />
-        <h1 className='text-[30px]'>줄거리</h1>
-        <h4 className='whitespace-pre-line'>{formatOverview(movie.overview)}</h4>
+        <h2 className='text-[30px]'>줄거리</h2>
+        <p className='whitespace-pre-line'>{formatOverview(movie.overview)}</p>
         <br />
         {movie.homepage && <a href={movie.homepage}>{movie.title} 보러가기</a>}
       </section>
       {/* 제작사 부분 */}
       <section>
         <br />
-        <h1 className='text-[30px]'>제작사</h1>
+        <h2 className='text-[30px]'>제작사</h2>
         <div className='flex flex-row items-center gap-[30px]'>
           {movie.production_companies.map((company) => {
             return (
-              <div key={company.id}>
+              <ul key={company.id}>
                 <Image src={IMG_PATH + company.logo_path} width={200} height={100} alt={company.name} />
-              </div>
+              </ul>
             );
           })}
         </div>
       </section>
-    </main>
+    </section>
   );
 };
 
