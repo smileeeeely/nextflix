@@ -25,3 +25,18 @@ body {
     text-wrap: balance;
   }
 }
+
+/* 가로 스크롤바 커스텀 */
+.scroll-container::-webkit-scrollbar {
+  height: 8px; /* 스크롤바의 너비 */
+}
+
+.scroll-container::-webkit-scrollbar-track,
+::-webkit-scrollbar-button {
+  background: transparent; /* 스크롤 트랙을 투명하게 */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(120, 20, 20, 0.5); /* 스크롤바의 색상 반투명 */
+  border-radius: 4px;
+}
