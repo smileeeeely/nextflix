@@ -10,24 +10,40 @@ interface Props {
 const Info = ({ movie }: Props) => {
   return (
     <main className='ml-[20px] flex flex-col'>
-      <section className='flex w-full flex-row items-end bg-green-300'>
-        <h1 className='mr-[20px] text-[30px]'>{movie.title}</h1>
+      {/* 한 줄 평 */}
+      <header className='text-center text-[40px] italic'>"{movie.tagline}"</header>
+      {/* 영화 이름 & 장르 내용 */}
+      <section className='flex w-full flex-row items-baseline'>
+        <h1 className='mr-[20px] text-[40px]'>{movie.title}</h1>
 
         {movie.genres.map((genre) => {
           // TODO: 추후 genre component 적용
           return <p key={genre.id}>{genre.name}</p>;
         })}
+        <div className='ml-[20px] flex items-baseline gap-[10px] text-[22px]'>
+          개봉일<p className='text-[18px]'>{movie.release_date}</p>
+          평점
+          <p className='flex flex-row items-baseline gap-[5px] text-[18px]'>
+            {movie.vote_average}
+            <p className='text-[12px]'>({movie.vote_count})</p>
+          </p>
+          런타임 <p className='text-[18px]'>{movie.runtime}분</p>
+        </div>
       </section>
+      {/* 영화 줄거리 */}
       <section>
+        <br />
+        <h1 className='text-[30px]'>줄거리</h1>
         <h4 className='whitespace-pre-line'>{formatOverview(movie.overview)}</h4>
+        <br />
         {movie.homepage && <a href={movie.homepage}>{movie.title} 보러가기</a>}
       </section>
-      {/* 제작 부분 */}
+      {/* 제작사 부분 */}
       <section>
+        <br />
         <h1 className='text-[30px]'>제작사</h1>
         <div className='flex flex-row items-center gap-[30px]'>
           {movie.production_companies.map((company) => {
-            // TODO: 추후 genre component 적용
             return (
               <div key={company.id}>
                 <Image src={IMG_PATH + company.logo_path} width={200} height={100} alt={company.name} />
