@@ -42,20 +42,25 @@ const IntroPage = () => {
   }, [timerId]);
 
   return (
-    <div>
-      <form onSubmit={handleTitle}>
-        <input
-          type='text'
-          value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-          placeholder='영화 제목을 입력해주세요'
-          required
-        />
-        <button type='submit'>검색</button>
-      </form>
-      <Link href='/category'>바로가기</Link>
+    <div className='px-20'>
+      <div className='flex h-screen flex-col items-center justify-center gap-10 px-20'>
+        <div className='w-full'>
+          <form onSubmit={handleTitle} className='flex items-center justify-between gap-10'>
+            <input
+              type='text'
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+              placeholder='영화 제목을 입력해주세요'
+              required
+              className='w-full rounded-md bg-[#e6354f] p-4 text-black placeholder-black outline-none'
+            />
+            <button type='submit'>검색</button>
+          </form>
+        </div>
+        <Link href='/category'>바로가기</Link>
+      </div>
     </div>
   );
 };
