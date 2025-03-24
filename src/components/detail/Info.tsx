@@ -1,8 +1,8 @@
-import { IMG_PATH } from '@/app/detail/[id]/page';
 import { Movie } from '@/types/DetailMovie';
 import { formatOverview } from '@/utils/formatFunction';
 import Image from 'next/image';
 import WrapperBox from '@/components/detail/WrapperBox';
+import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 
 interface Props {
   movie: Movie | null;
@@ -58,7 +58,7 @@ const Info = ({ movie }: Props) => {
             return (
               <div key={company.id}>
                 {company.logo_path ? (
-                  <Image src={IMG_PATH + company.logo_path} width={200} height={100} alt={company.name} />
+                  <Image src={TMDB_IMG_URL + company.logo_path} width={200} height={100} alt={company.name} />
                 ) : (
                   <p>{company.name}</p>
                 )}
