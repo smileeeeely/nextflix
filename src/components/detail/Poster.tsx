@@ -7,7 +7,7 @@ interface Props {
 
 const Poster = ({ src, alt }: Props) => {
   return (
-    <section>
+    <section className='flex items-center justify-center'>
       <Image src={src} width={300} height={400} alt={alt} />
     </section>
   );
