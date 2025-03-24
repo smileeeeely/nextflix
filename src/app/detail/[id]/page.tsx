@@ -93,7 +93,10 @@ const mokData = {
   'vote_count': 816,
 };
 
-const src = 'https://image.tmdb.org/t/p/w300' + mokData.poster_path;
+// TODO: URL Import 상수 지정
+export const IMG_PATH = 'https://image.tmdb.org/t/p/w300';
+
+const src = IMG_PATH + mokData.poster_path;
 
 interface Props {
   params: {
