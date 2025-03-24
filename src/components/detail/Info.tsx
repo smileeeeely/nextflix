@@ -36,7 +36,11 @@ const Info = ({ movie }: Props) => {
         <h2 className='text-[30px]'>줄거리</h2>
         <p className='whitespace-pre-line'>{formatOverview(movie.overview)}</p>
         <br />
-        {movie.homepage && <a href={movie.homepage}>{movie.title} 보러가기</a>}
+        {movie.homepage && (
+          <a href={movie.homepage} rel='noreferer' target='_blank'>
+            {movie.title} 보러가기
+          </a>
+        )}
       </section>
       {/* 제작사 부분 */}
       <section>
