@@ -15,8 +15,8 @@ export const getNowPlaying = async (page: number = 1): Promise<ApiResponse> => {
   const TMDB_NOW_PLAYING_API = `${TMDB_BASE_URL}/now_playing?language=ko&page=${page}&region=KR`;
   const res = await fetch(TMDB_NOW_PLAYING_API, {
     ...options,
-    cache: page <= 3 ? 'force-cache' : 'no-store',
-    next: page <= 3 ? { revalidate: 86400 } : undefined,
+    cache: page <= 3 ? 'force-cache' : 'no-store', // 1~3: ISR / 4~: SSR
+    next: page <= 3 ? { revalidate: 86400 } : undefined, // 1~3: 하루
   });
   const data = await res.json();
   return data;
