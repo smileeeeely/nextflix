@@ -4,7 +4,7 @@ import { getPopular } from '@/utils/tmdb/serverApi';
 import React from 'react';
 
 // 서버 컴포넌트에서 쿼리 파라미터 가져오기
-const nowPlayingPage = async ({ params }: { params: { page?: string } }) => {
+const nowPlayingPage = async ({ params }: { params: { page: null | string } }) => {
   const page = parseInt(params.page || '1'); // 숫자로 변환
   const data = await getPopular(page);
   return (
