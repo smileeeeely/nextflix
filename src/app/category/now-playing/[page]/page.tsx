@@ -1,6 +1,6 @@
 import PageNationBtn from '@/components/pageNationBtn';
 import { Movie } from '@/types/category/movie';
-import { getNowPlaying } from '@/utils/tmdb/serverApi';
+import { getNowPlaying } from '@/services/category/serverApi';
 import React from 'react';
 
 // 서버 컴포넌트에서 쿼리 파라미터 가져오기

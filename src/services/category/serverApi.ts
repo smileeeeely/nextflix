@@ -1,6 +1,6 @@
 'use server';
 import { ApiResponse } from '@/types/category/movie';
-import { TMDB_BASE_URL } from '@/utils/tmdb/tmdbURL';
+import { TMDB_BASE_URL } from '@/constants/tmdbBaseUrl';
 
 const options = {
   method: 'GET',
