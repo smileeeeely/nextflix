@@ -2,7 +2,9 @@
 
 import Poster from '@/components/detail/Poster';
 import Info from '@/components/detail/Info';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getMovieDetails } from '@/services/serviceMovieDetails';
+import { Movie } from '@/types/DetailMovie';
 
 const mokData = {
   'adult': false,
@@ -105,19 +107,19 @@ interface Props {
 }
 
 const DetailPage = ({ params }: Props) => {
+  const [movie, setMovie] = useState<Movie | null>(null);
   useEffect(() => {
     const dataFetch = async () => {
       // TODO: 실제 data fetching 로직 구현
-      const data = () => {
-        console.log(params.id);
-      };
+      const movie = await getMovieDetails(mokData.id);
+      setMovie(movie);
     };
     dataFetch();
   }, []);
   return (
     <main>
       <Poster src={src} alt={mokData.title}></Poster>
-      <Info movie={mokData} />
+      <Info movie={movie} />
     </main>
   );
 };
