@@ -2,12 +2,13 @@ import React from 'react';
 
 interface Props {
   link: string;
+  label: string;
 }
 
-const LinkBtn = ({ link }: Props) => {
+const LinkBtn = ({ link, label }: Props) => {
   return (
-    <section className='my-[20px] flex items-center justify-center'>
-      <button onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}>예고편 보러가기</button>
+    <section className='my-[20px]'>
+      <button onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}>{label}</button>
     </section>
   );
 };

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { Movie } from '@/types/DetailMovie';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
-import VideoBtn from '@/components/detail/VideoBtn';
+import LinkBtn from '@/components/detail/LinkBtn';
 
 interface Props {
   params: {
@@ -34,7 +34,10 @@ const DetailPage = ({ params }: Props) => {
   return (
     <main>
       {movie && <Poster src={src} alt={movie.title}></Poster>}
-      {videoLink && <VideoBtn videoLink={videoLink} />}
+      <section className='flex items-center justify-center gap-[20px]'>
+        {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
+        {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
+      </section>
       <Info movie={movie} />
     </main>
   );
