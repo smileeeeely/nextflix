@@ -7,6 +7,8 @@ import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { Movie } from '@/types/DetailMovie';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
+import { getComments } from '@/services/detail/serviceComments';
+import { Comment } from '@/types/Comment';
 
 interface Props {
   params: {
@@ -27,14 +29,16 @@ const DetailPage = ({ params }: Props) => {
 
   useEffect(() => {
     const dataFetch = async () => {
-      const [_movie, _videoLink] = await Promise.all([
-        getMovieDetails(parseInt(params.id)),
-        getMovieVideo(parseInt(params.id)),
+      const [_movie, _videoLink, _comments] = await Promise.all([
+        getMovieDetails(params.id),
+        getMovieVideo(params.id),
+        getComments(params.id),
       ]);
 
       if (_movie.poster_path) {
         setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
       }
+
       setMovie(_movie);
       setVideoLink(_videoLink);
       setComments(_comments);
