@@ -7,7 +7,7 @@ import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { Movie } from '@/types/DetailMovie';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
-import { getComments } from '@/services/detail/serviceComments';
+import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
 import MovieComments from '@/components/detail/MovieComments';
 import InputComment from '@/components/detail/InputComment';
@@ -30,9 +30,8 @@ const DetailPage = ({ params }: Props) => {
     id: '6538aa12-c21b-416b-ac67-3c071829ecde',
   };
 
-  // Insert handler
+  // Insert Handler
   const onSubmitCommentsHandler = (comment: Comment) => {
-    console.log(mok_user.nickname);
     setComments((prev) =>
       prev
         ? [...prev, { ...comment, users: { nickname: mok_user.nickname } }]
@@ -40,12 +39,17 @@ const DetailPage = ({ params }: Props) => {
     );
   };
 
+  // Delete Handler
+  const onDeleteCommentsHandler = (commentId: string) => {
+    setComments((prev) => (prev ? prev.filter((comment) => comment.id !== commentId) : []));
+  };
+
   useEffect(() => {
     const dataFetch = async () => {
       const [_movie, _videoLink, _comments] = await Promise.all([
         getMovieDetails(params.id),
         getMovieVideo(params.id),
-        getComments(params.id),
+        getMovieComments(params.id),
       ]);
 
       if (_movie.poster_path) {
@@ -71,7 +75,7 @@ const DetailPage = ({ params }: Props) => {
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
       <Info movie={movie} />
-      {comments && <MovieComments comments={comments} />}
+      {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
       <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />
     </section>
   );
