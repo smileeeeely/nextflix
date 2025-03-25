@@ -21,7 +21,7 @@ const MovieComments = ({ comments }: Props) => {
     <section>
       {comments.map((comment) => {
         return (
-          <WrapperBox>
+          <WrapperBox key={comment.id}>
             <p>{comment.content}</p>
             <p className='flex justify-end'>
               {comment.users.nickname} · {formatDate(comment.created_at)}
