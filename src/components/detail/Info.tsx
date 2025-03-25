@@ -19,7 +19,7 @@ const Info = ({ movie }: Props) => {
   return (
     <section className='ml-[20px] flex flex-col'>
       {/* 한 줄 평 */}
-      <header className='text-center text-[40px] italic'>"{movie.tagline}"</header>
+      {movie.tagline && <header className='text-center text-[40px] italic'>"{movie.tagline}"</header>}
       {/* 영화 이름 & 장르 내용 */}
       <WrapperBox>
         <div className='flex flex-row items-baseline'>
