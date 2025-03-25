@@ -1,20 +1,23 @@
 'use client';
 
 import { setSupabaseSignIn } from '@/services/signIn';
+import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 
 const SignInForm = () => {
   const router = useRouter();
-  const { register, handleSubmit, formState } = useForm<FieldValues>({ mode: 'onBlur' });
+  const { register, handleSubmit, formState } = useForm<FieldValues>({ mode: 'onBlur' }); //훅 폼 사용
 
-  const onSubmit = async (value: FieldValues): Promise<void> => {
+  const onSubmit = async (value: FieldValues) => {
     try {
       const { email, password } = value;
-      const data = await setSupabaseSignIn({ email, password });
-      console.log(data);
+      const data = await setSupabaseSignIn({ email, password }); //서버 액션 함수 호출
+      if (data) {
+        useAuthStore.getState().signIn(email); //로그인 상태 전역 업데이트
+      }
       alert('로그인되었습니다.');
-      router.push('/home');
+      router.push('/home'); //로그인 성공 시 홈으로 이동
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('로그인에 실패하였습니다.');
