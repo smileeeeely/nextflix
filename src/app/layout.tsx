@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang='ko'>
       <body className={`antialiased`}>
         <HeaderLayout />
-        <main>{children}</main>
+        <main className='mx-auto max-w-[1200px]'>{children}</main>
         <FooterLayout />
       </body>
     </html>
