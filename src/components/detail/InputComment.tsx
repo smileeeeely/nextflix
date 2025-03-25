@@ -2,7 +2,7 @@ import WrapperBox from '@/components/detail/WrapperBox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { insertComment } from '@/services/detail/serviceComments';
+import { insertMovieComment } from '@/services/detail/serviceComments';
 
 interface Props {
   movie_id: number;
@@ -21,7 +21,7 @@ const InputComment = ({ movie_id, onSubmit }: Props) => {
   const handleInsertComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Insert 연결
-    const comment = await insertComment({ user_id: mok_user.id, content, movie_id });
+    const comment = await insertMovieComment({ user_id: mok_user.id, content, movie_id });
     if (comment) {
       onSubmit(comment);
       setContent('');
