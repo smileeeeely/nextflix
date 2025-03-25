@@ -24,7 +24,7 @@ const MovieComments = ({ comments }: Props) => {
           <WrapperBox key={comment.id}>
             <p>{comment.content}</p>
             <p className='flex justify-end'>
-              {comment.users.nickname} · {formatDate(comment.created_at)}
+              {comment.users?.nickname} · {formatDate(comment.created_at)}
             </p>
             {isLogin && comment.user_id === mok_user.id ? (
               <div className='mt-[10px] flex justify-end'>
