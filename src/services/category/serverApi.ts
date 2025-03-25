@@ -1,9 +1,6 @@
 'use server';
 import { ApiResponse } from '@/types/category/movie';
-import { TMDB_BASE_URL } from '@/constants/tmdbBaseUrl';
-
-export const ONE_DAY_SECONDS = 60 * 60 * 24;
-const CACHE_PAGE = 3;
+import { API_LANGUAGE, API_PAGE, CACHE_PAGE, CATEGORY_ENDPOINTS, ONE_DAY_SECONDS } from '@/constants/movieCategory';
 
 const options = {
   method: 'GET',
@@ -14,8 +11,8 @@ const options = {
 };
 
 // NowPlaying
-export const getNowPlaying = async (page: number = 1): Promise<ApiResponse> => {
-  const TMDB_NOW_PLAYING_API = `${TMDB_BASE_URL}/now_playing?language=ko&page=${page}&region=KR`;
+export const getNowPlaying = async (page: number = API_PAGE): Promise<ApiResponse> => {
+  const TMDB_NOW_PLAYING_API = `${CATEGORY_ENDPOINTS.now_playing}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_NOW_PLAYING_API, {
     ...options,
     cache: page <= CACHE_PAGE ? 'force-cache' : 'no-store', // 1~3: ISR / 4~: SSR
@@ -26,8 +23,8 @@ export const getNowPlaying = async (page: number = 1): Promise<ApiResponse> => {
 };
 
 // Popular
-export const getPopular = async (page: number = 1): Promise<ApiResponse> => {
-  const TMDB_POPULAR_API = `${TMDB_BASE_URL}/popular?language=ko&page=${page}&region=KR`;
+export const getPopular = async (page: number = API_PAGE): Promise<ApiResponse> => {
+  const TMDB_POPULAR_API = `${CATEGORY_ENDPOINTS.popular}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_POPULAR_API, {
     ...options,
     cache: page <= CACHE_PAGE ? 'force-cache' : 'no-store',
@@ -38,8 +35,8 @@ export const getPopular = async (page: number = 1): Promise<ApiResponse> => {
 };
 
 // TopRated
-export const getTopRated = async (page: number = 1): Promise<ApiResponse> => {
-  const TMDB_TOP_RATED_API = `${TMDB_BASE_URL}/top_rated?language=ko&page=${page}&region=KR`;
+export const getTopRated = async (page: number = API_PAGE): Promise<ApiResponse> => {
+  const TMDB_TOP_RATED_API = `${CATEGORY_ENDPOINTS.top_rated}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_TOP_RATED_API, {
     ...options,
     cache: page <= CACHE_PAGE ? 'force-cache' : 'no-store',
@@ -49,8 +46,8 @@ export const getTopRated = async (page: number = 1): Promise<ApiResponse> => {
   return data;
 };
 
-export const getUpcoming = async (page: number = 1): Promise<ApiResponse> => {
-  const TMDB_UPCOMING_API = `${TMDB_BASE_URL}/upcoming?language=ko&page=${page}&region=KR`;
+export const getUpcoming = async (page: number = API_PAGE): Promise<ApiResponse> => {
+  const TMDB_UPCOMING_API = `${CATEGORY_ENDPOINTS.upcoming}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_UPCOMING_API, {
     ...options,
     cache: page <= CACHE_PAGE ? 'force-cache' : 'no-store',
