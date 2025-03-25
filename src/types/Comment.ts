@@ -8,5 +8,5 @@ export interface Comment {
   user_id: string;
   content: string;
   movie_id: number;
-  users: Nickname;
+  users?: Nickname;
 }
