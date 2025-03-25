@@ -9,9 +9,9 @@ const nowPlayingPage = async ({ params }: { params: { page: null | string } }) =
   const page = parseInt(params.page || '1'); // 숫자로 변환
   const data = await getNowPlaying(page);
   return (
-    <main className='mx-auto max-w-[1200px]'>
+    <article>
       <section>
-        <h1 className='category-title'>지금 상영 중</h1>
+        <h2 className='category-title'>지금 상영 중</h2>
         <div className='category-grid'>
           {data.results.map((movie: Movie) => {
             return (
@@ -23,7 +23,7 @@ const nowPlayingPage = async ({ params }: { params: { page: null | string } }) =
         </div>
       </section>
       <PageNationBtn page={page} totalPages={data.total_pages} basePath={'category/now-playing'} />
-    </main>
+    </article>
   );
 };
 
