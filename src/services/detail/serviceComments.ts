@@ -18,3 +18,19 @@ export const getComments = async (movieId: number): Promise<Comment[] | null> =>
 
   return comments;
 };
+
+export const insertComment = async ({
+  user_id,
+  content,
+  movie_id,
+}: {
+  user_id: string;
+  content: string;
+  movie_id: number;
+}): Promise<Comment> => {
+  const { data, error } = await supabase.from('comments').insert({ user_id, content, movie_id }).select();
+
+  if (error) throw error;
+
+  return data[0];
+};
