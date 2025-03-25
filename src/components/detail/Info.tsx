@@ -5,17 +5,10 @@ import WrapperBox from '@/components/detail/WrapperBox';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 
 interface Props {
-  movie: Movie | null;
+  movie: Movie;
 }
 
 const Info = ({ movie }: Props) => {
-  if (!movie) {
-    return (
-      <main>
-        <div>Loading...</div>
-      </main>
-    );
-  }
   return (
     <section className='ml-[20px] flex flex-col'>
       {/* 한 줄 평 */}
