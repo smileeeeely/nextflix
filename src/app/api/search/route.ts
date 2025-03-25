@@ -8,6 +8,7 @@ export const GET = async (request: Request) => {
   const FETCH_URL = `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=ko-KOR&page=1`;
   try {
     const res = await fetch(FETCH_URL, {
+      //겹치는 부분. 추후 리팩토링으로 병합
       headers: {
         accept: 'application/json',
         Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
