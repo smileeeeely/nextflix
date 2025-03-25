@@ -7,12 +7,14 @@ export interface SignInProps {
   password: string;
 }
 
+// supabase 로그인 서버 액션
 export const setSupabaseSignIn = async ({ email, password }: SignInProps) => {
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
   if (error) {
     throw new Error(error.message);
   }
+  return data;
 };
