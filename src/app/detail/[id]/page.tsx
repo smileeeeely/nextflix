@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { Movie } from '@/types/DetailMovie';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
+import VideoBtn from '@/components/detail/VideoBtn';
 
 interface Props {
   params: {
@@ -16,13 +17,16 @@ interface Props {
 const DetailPage = ({ params }: Props) => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [src, setSrc] = useState<string>('');
+  const [videoLink, setVideoLink] = useState<string | null>(null);
 
   useEffect(() => {
     const dataFetch = async () => {
-      const movie = await getMovieDetails(parseInt(params.id));
-      await getMovieVideo(parseInt(params.id));
-      setSrc(`${TMDB_IMG_URL}/${movie.poster_path}`);
-      setMovie(movie);
+      const _movie = await getMovieDetails(parseInt(params.id));
+      const _videoLink = await getMovieVideo(parseInt(params.id));
+
+      setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
+      setMovie(_movie);
+      setVideoLink(_videoLink);
     };
     dataFetch();
   }, []);
@@ -30,6 +34,7 @@ const DetailPage = ({ params }: Props) => {
   return (
     <main>
       {movie && <Poster src={src} alt={movie.title}></Poster>}
+      {videoLink && <VideoBtn videoLink={videoLink} />}
       <Info movie={movie} />
     </main>
   );
