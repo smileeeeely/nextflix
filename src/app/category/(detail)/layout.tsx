@@ -1,16 +1,9 @@
-import BackButton from '@/components/back-button';
-
 const CategoryLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return (
-    <>
-      <BackButton />
-      {children}
-    </>
-  );
+  return <div className='mt-[45px]'>{children}</div>;
 };
 
 export default CategoryLayout;
