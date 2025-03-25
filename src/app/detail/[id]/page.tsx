@@ -10,14 +10,20 @@ import LinkBtn from '@/components/detail/LinkBtn';
 
 interface Props {
   params: {
-    id: string;
+    id: number;
   };
 }
+
+const mok_user = {
+  nickname: 'test1',
+  email: 'test1@test.com',
+};
 
 const DetailPage = ({ params }: Props) => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [src, setSrc] = useState<string>('');
   const [videoLink, setVideoLink] = useState<string | null>(null);
+  const [comments, setComments] = useState<Comment[] | null>(null);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -31,6 +37,7 @@ const DetailPage = ({ params }: Props) => {
       }
       setMovie(_movie);
       setVideoLink(_videoLink);
+      setComments(_comments);
     };
     dataFetch();
   }, []);
