@@ -11,3 +11,5 @@ export const API_LANGUAGE = 'ko-KR';
 export const API_PAGE = 1;
 export const CACHE_PAGE = 3;
 export const ONE_DAY_SECONDS = 60 * 60 * 24;
+
+export const IMG_BASE_URL = 'https://image.tmdb.org/';
