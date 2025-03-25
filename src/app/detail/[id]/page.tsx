@@ -21,25 +21,33 @@ const DetailPage = ({ params }: Props) => {
 
   useEffect(() => {
     const dataFetch = async () => {
-      const _movie = await getMovieDetails(parseInt(params.id));
-      const _videoLink = await getMovieVideo(parseInt(params.id));
+      const [_movie, _videoLink] = await Promise.all([
+        getMovieDetails(parseInt(params.id)),
+        getMovieVideo(parseInt(params.id)),
+      ]);
 
-      setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
+      if (_movie.poster_path) {
+        setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
+      }
       setMovie(_movie);
       setVideoLink(_videoLink);
     };
     dataFetch();
   }, []);
 
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <main>
-      {movie && <Poster src={src} alt={movie.title}></Poster>}
+    <section>
+      {src && <Poster src={src} alt={movie.title}></Poster>}
       <section className='flex items-center justify-center gap-[20px]'>
         {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
       <Info movie={movie} />
-    </main>
+    </section>
   );
 };
 
