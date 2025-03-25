@@ -1,5 +1,6 @@
 'use server';
 
+import { YOUTUBE_BASE_URL } from '@/constants/movieVideoUrl';
 import { TMDB_URL } from '@/constants/tmdbConstants';
 import { Movie } from '@/types/DetailMovie';
 import { MovieVideos, Video } from '@/types/Video';
@@ -17,7 +18,7 @@ export const getMovieDetails = async (id: number): Promise<Movie> => {
   return data;
 };
 
-export const getMovieVideo = async (id: number): Promise<Video | null> => {
+export const getMovieVideo = async (id: number): Promise<string | null> => {
   const res = await fetch(`${TMDB_URL}/${id}/videos?language=ko`, {
     method: 'GET',
     headers: {
@@ -26,9 +27,10 @@ export const getMovieVideo = async (id: number): Promise<Video | null> => {
     },
   });
   const data: MovieVideos = await res.json();
-  console.log(data);
+
   if (data.results) {
-    return data.results[0];
+    const videoUrl = YOUTUBE_BASE_URL + data.results[0].key;
+    return videoUrl;
   }
 
   return null;
