@@ -24,6 +24,22 @@ const DetailPage = ({ params }: Props) => {
   const [videoLink, setVideoLink] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[] | null>(null);
 
+  const mok_user = {
+    nickname: 'test1',
+    email: 'test1@test.com',
+    id: '6538aa12-c21b-416b-ac67-3c071829ecde',
+  };
+
+  // Insert handler
+  const onSubmitCommentsHandler = (comment: Comment) => {
+    console.log(mok_user.nickname);
+    setComments((prev) =>
+      prev
+        ? [...prev, { ...comment, users: { nickname: mok_user.nickname } }]
+        : [{ ...comment, users: { nickname: mok_user.nickname } }]
+    );
+  };
+
   useEffect(() => {
     const dataFetch = async () => {
       const [_movie, _videoLink, _comments] = await Promise.all([
@@ -56,7 +72,7 @@ const DetailPage = ({ params }: Props) => {
       </section>
       <Info movie={movie} />
       {comments && <MovieComments comments={comments} />}
-      <InputComment />
+      <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />
     </section>
   );
 };
