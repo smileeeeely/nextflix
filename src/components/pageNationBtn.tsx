@@ -1,6 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
+
 interface PageNationProps {
   page: number;
   totalPages: number;
@@ -17,12 +20,20 @@ const PageNationBtn = ({ page, totalPages, basePath }: PageNationProps) => {
   };
 
   return (
-    <div className='flex gap-8'>
-      {page > 1 && <button onClick={() => goToPage(page - 1)}>이전</button>}
+    <div className='my-[30px] flex place-content-center gap-8'>
+      {page > 1 && (
+        <ChevronLeft className='cursor-pointer' onClick={() => goToPage(page - 1)}>
+          이전
+        </ChevronLeft>
+      )}
       <p>
-        페이지 {page} / {totalPages}
+        {page} / {totalPages}
       </p>
-      {page < totalPages && <button onClick={() => goToPage(page + 1)}>다음</button>}
+      {page < totalPages && (
+        <ChevronRight className='cursor-pointer' onClick={() => goToPage(page + 1)}>
+          다음
+        </ChevronRight>
+      )}
     </div>
   );
 };
