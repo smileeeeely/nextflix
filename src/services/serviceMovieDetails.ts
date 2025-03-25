@@ -29,9 +29,11 @@ export const getMovieVideo = async (id: number): Promise<string | null> => {
   const data: MovieVideos = await res.json();
 
   if (data.results) {
-    const videoUrl = YOUTUBE_BASE_URL + data.results[0].key;
-    return videoUrl;
+    for (const video of data.results) {
+      if (video.site === 'YouTube') {
+        return YOUTUBE_BASE_URL + video.key;
+      }
+    }
   }
-
   return null;
 };
