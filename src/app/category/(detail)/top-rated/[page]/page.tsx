@@ -9,9 +9,9 @@ const topRatedPage = async ({ params }: { params: { page: null | string } }) => 
   const page = parseInt(params.page || '1'); // 숫자로 변환
   const data = await getTopRated(page);
   return (
-    <main className='mx-auto max-w-[1200px]'>
+    <article>
       <section>
-        <h1 className='category-title'>평점순</h1>
+        <h2 className='category-title'>평점순</h2>
         <div className='category-grid'>
           {data.results.map((movie: Movie) => {
             return (
@@ -23,7 +23,7 @@ const topRatedPage = async ({ params }: { params: { page: null | string } }) => 
         </div>
       </section>
       <PageNationBtn page={page} totalPages={data.total_pages} basePath={'category/top-rated'} />
-    </main>
+    </article>
   );
 };
 
