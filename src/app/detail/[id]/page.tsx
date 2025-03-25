@@ -9,17 +9,14 @@ import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
+import MovieComments from '@/components/detail/MovieComments';
+import InputComment from '@/components/detail/InputComment';
 
 interface Props {
   params: {
     id: number;
   };
 }
-
-const mok_user = {
-  nickname: 'test1',
-  email: 'test1@test.com',
-};
 
 const DetailPage = ({ params }: Props) => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -58,6 +55,8 @@ const DetailPage = ({ params }: Props) => {
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
       <Info movie={movie} />
+      {comments && <MovieComments comments={comments} />}
+      <InputComment />
     </section>
   );
 };
