@@ -30,6 +30,14 @@
   border-radius: 4px;
 }
 
+.category-grid {
+  @apply grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-6;
+}
+
+.category-title {
+  @apply mx-8 my-4 text-[30px] font-bold;
+}
+
 button {
   background: #e6354f;
   padding: 1rem 2rem;

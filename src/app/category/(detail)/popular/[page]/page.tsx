@@ -9,9 +9,10 @@ const popularPage = async ({ params }: { params: { page: null | string } }) => {
   const page = parseInt(params.page || '1'); // 숫자로 변환
   const data = await getPopular(page);
   return (
-    <main>
+    <main className='mx-auto max-w-[1200px]'>
       <section>
-        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-6'>
+        <h1 className='category-title'>인기순</h1>
+        <div className='category-grid'>
           {data.results.map((movie: Movie) => {
             return (
               <div key={movie.id} className='mx-auto w-40 place-content-center'>
