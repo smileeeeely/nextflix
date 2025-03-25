@@ -1,5 +1,5 @@
 import { Movie } from '@/types/Movie';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent } from '../ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -8,6 +8,9 @@ type MovieCardProps = {
 };
 
 const MovieCard = ({ movie }: MovieCardProps) => {
+  //무비카드 컴포넌트 사용시 .map()을 사용하는 로직에서 key 속성을 넣어주는 태그에 w-40 넣어주어야 비율대로 포스터가 나타납니다.
+  // 자동 적용되도록 설정해 놓은 상태이기 때문에 영화내용이 담긴 데이터만 props로 넘겨주면 됩니다.
+  // 리팩토링시 상수와 utils들은 분리예정입니다.
   const IMG_BASE_URL = 'https://image.tmdb.org';
   const formattedDate = new Date(movie.release_date).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -27,6 +30,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
             sizes='(max-width: 640px) 100vw, 20vw'
             className='rounded-md object-cover'
           />
+          {/* 평점 부분은 ui 변경예정 */}
           <div>{movie.vote_average.toFixed(1)}</div>
         </div>
       </Link>
