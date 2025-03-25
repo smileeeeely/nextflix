@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import noImage from '../../../public/images/noImage.png';
+import noImage from '@images/images/noImage.png';
 import { IMG_BASE_URL } from '@/constants/movieCategory';
 
 const SearchPage = () => {
