@@ -26,11 +26,11 @@ const CategorySection = ({ categoryName, movies }: CategorySectionProps) => {
       </Link>
 
       {/* 가로 스크롤을 위한 flex 컨테이너 */}
-      <ul className='scroll-container flex justify-start gap-6 overflow-x-auto'>
+      <ul className='scroll-container flex justify-start gap-7 overflow-x-auto'>
         {/* 맵 돌리기 */}
         {movies.map((movie) => (
           // 카드컴포넌트 영역 , 각 영화 id로 상세페이지 이동
-          <li key={movie.id} className='relative w-40 flex-none text-center'>
+          <li key={movie.id} className='relative mb-4 w-40 flex-none text-center'>
             {/* 포스터 영역 */}
             <MovieCard movie={movie} />
           </li>
