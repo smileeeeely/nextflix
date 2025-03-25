@@ -9,3 +9,5 @@ export const CATEGORY_ENDPOINTS = {
 
 export const API_LANGUAGE = 'ko-KR';
 export const API_PAGE = 1;
+
+export const IMG_BASE_URL = 'https://image.tmdb.org/';
