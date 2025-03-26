@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { SIGNIN } from '@/constants/pagePath';
 import { EMAIL, NICKNAME, PASSWORD } from '@/constants/signUp';
 import { useSignUpSchema } from '@/hooks/useSignUpSchema';
@@ -31,35 +32,51 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className='flex h-full flex-col items-center justify-center'>
-      <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-lg'>
-        <h1 className='mb-6 text-3xl'>회원가입</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-4 rounded-2xl'>
-          <div className='flex flex-col gap-2'>
-            <label>이메일</label>
-            <input {...register(EMAIL)} className='bg-orange-100 text-black' placeholder='이메일을 입력해주세요' />
-            {formState.errors.email && <span>{formState.errors.email.message}</span>}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <label>비밀번호</label>
-            <input
-              type={PASSWORD}
-              {...register(PASSWORD)}
-              className='bg-orange-100 text-black'
-              placeholder='비밀번호를 입력해주세요'
-            />
-            {formState.errors.password && <span>{formState.errors.password.message}</span>}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <label>닉네임</label>
-            <input {...register(NICKNAME)} className='bg-orange-100 text-black' placeholder='닉네임을 입력해주세요' />
-            {formState.errors.nickname && <span>{formState.errors.nickname.message}</span>}
-          </div>
-          <button disabled={!formState.isValid} type='submit'>
+    <div className='mt-[100px] flex flex-col items-center'>
+      <form onSubmit={handleSubmit(onSubmit)} className='mx-auto h-[430px] w-[350px] rounded-lg bg-gray-200 p-5'>
+        <div className='flex flex-col items-center'>
+          <label htmlFor='email' />
+          <input {...register(EMAIL)} placeholder='email' className='mb-2 mt-7 w-[270px] rounded-md p-2' />
+          {formState.errors.email ? (
+            <span className='block h-[20px] text-[14px] font-semibold text-red-500'>
+              {formState.errors.email.message as string}
+            </span>
+          ) : (
+            <span className='invisible block h-[20px] text-[14px] font-semibold'></span>
+          )}
+          <label htmlFor='password' />
+          <input
+            type={PASSWORD}
+            {...register(PASSWORD)}
+            className='mb-2 mt-7 w-[270px] rounded-md p-2'
+            placeholder='password'
+          />
+          {formState.errors.password ? (
+            <span className='block h-[20px] text-[14px] font-semibold text-red-500'>
+              {formState.errors.password.message as string}
+            </span>
+          ) : (
+            <span className='invisible block h-[20px] text-[14px] font-semibold'></span>
+          )}
+          <label htmlFor='nickname' />
+          <input {...register(NICKNAME)} className='mb-2 mt-7 w-[270px] rounded-md p-2' placeholder='nickname' />
+          {formState.errors.nickname ? (
+            <span className='block h-[20px] text-[14px] font-semibold text-red-500'>
+              {formState.errors.nickname.message as string}
+            </span>
+          ) : (
+            <span className='invisible block h-[20px] text-[14px] font-semibold'></span>
+          )}
+          <Button type='submit' className='mt-8 h-[50px] w-[270px] items-center font-semibold text-white'>
             회원가입
-          </button>
-        </form>
-        <Link href={SIGNIN}>이미 회원이신가요?</Link>
+          </Button>
+        </div>
+      </form>
+      <div className='flex pt-3'>
+        <p>이미 회원이신가요?</p>
+        <Link href={SIGNIN}>
+          <p className='px-2 font-bold text-[#e6354f]'>로그인</p>
+        </Link>
       </div>
     </div>
   );

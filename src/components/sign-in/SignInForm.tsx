@@ -41,11 +41,11 @@ const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='mx-auto w-[350px] rounded-lg bg-gray-200 p-5'>
+    <form onSubmit={handleSubmit(onSubmit)} className='mx-auto h-[330px] w-[350px] rounded-lg bg-gray-200 p-5'>
       <div className='flex flex-col items-center'>
         <label htmlFor='email' />
         <input
-          className='m-3 w-[270px] rounded-md p-2'
+          className='mb-2 mt-7 w-[270px] rounded-md p-2'
           type='email'
           placeholder='email'
           {...register(EMAIL, {
@@ -56,12 +56,16 @@ const SignInForm = () => {
             },
           })}
         />
-        {formState.errors.email && (
-          <span className='text-[14px] font-semibold'>{formState.errors.email.message as string}</span>
+        {formState.errors.email ? (
+          <span className='block h-[20px] text-[14px] font-semibold text-red-500'>
+            {formState.errors.email.message as string}
+          </span>
+        ) : (
+          <span className='invisible block h-[20px] text-[14px] font-semibold'></span>
         )}
         <label htmlFor='password' />
         <input
-          className='m-3 w-[270px] rounded-md p-2'
+          className='mb-2 mt-7 w-[270px] rounded-md p-2'
           type='password'
           placeholder='password'
           {...register(PASSWORD, {
@@ -72,10 +76,14 @@ const SignInForm = () => {
             },
           })}
         />
-        {formState.errors.password && (
-          <span className='text-[14px] font-semibold'>{formState.errors.password.message as string}</span>
+        {formState.errors.password ? (
+          <span className='block h-[20px] text-[14px] font-semibold text-red-500'>
+            {formState.errors.password.message as string}
+          </span>
+        ) : (
+          <span className='invisible block h-[20px] text-[14px] font-semibold'></span>
         )}
-        <Button type='submit' className='my-5 h-[50px] w-[270px] items-center font-semibold text-white'>
+        <Button type='submit' className='mt-8 h-[50px] w-[270px] items-center font-semibold text-white'>
           로그인
         </Button>
       </div>
