@@ -10,7 +10,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useAuthListener(); //로그인 상태 감지 훅
+  // useAuthListener(); //로그인 상태 감지 훅
 
   return (
     <html lang='ko'>
