@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import MoviesSearch from './MoviesSearch';
 import { HOME } from '@/constants/pagePath';
+import MoviesSearch from '../layout/MoviesSearch';
 
 const Header = () => {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import MoviesSearch from '@/components/commons/MoviesSearch';
+import MoviesSearch from '@/components/layout/MoviesSearch';
 import { HOME } from '@/constants/pagePath';
 import Link from 'next/link';
 
