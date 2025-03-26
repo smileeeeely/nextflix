@@ -11,7 +11,7 @@ import { useInView } from 'react-intersection-observer';
 
 const SearchPage = () => {
   const params = useSearchParams();
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState<string>('');
   const [movies, setMovies] = useState<Movie[]>([]);
   const [ref, inView] = useInView({ threshold: 0 });
 

@@ -10,7 +10,7 @@ export const fetchSearchMovies = async ({ input, page = 1 }: { input: string; pa
 
 export const useSearchMovies = ({ searchInput = '' }: { searchInput?: string }) => {
   return useInfiniteQuery<PaginatedResponse<Movie>, Error, InfiniteData<PaginatedResponse<Movie>>, string[], number>({
-    queryKey: ['useSearchMovies'],
+    queryKey: ['useSearchMovies', searchInput],
     initialPageParam: 1,
     queryFn: ({ pageParam }) => fetchSearchMovies({ input: searchInput, page: pageParam }),
     getNextPageParam: (lastPage: PaginatedResponse<Movie>) => {
