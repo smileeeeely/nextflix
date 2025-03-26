@@ -1,6 +1,6 @@
 'use client';
 
-import MoviesSearch from '@/components/commons/MoviesSearch';
+import MoviesSearch from '@/components/layout/MoviesSearch';
 import Link from 'next/link';
 
 const IntroPage = () => {

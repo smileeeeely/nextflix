@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
 
@@ -40,7 +41,7 @@ const MoviesSearch = () => {
   }, [timerId]);
 
   return (
-    <div className='w-full'>
+    <div className='w-full max-w-[800px]'>
       <form onSubmit={handleTitle} className='flex items-center justify-between gap-10 max-md:gap-6'>
         <input
           type='text'
@@ -50,9 +51,11 @@ const MoviesSearch = () => {
           }}
           placeholder='영화 제목을 입력해주세요'
           required
-          className='w-full rounded-md bg-[#e6354f] p-4 text-black placeholder-black outline-none'
+          className='w-full rounded-md bg-[#e6354f] px-4 py-2 text-sm text-black placeholder-black outline-none'
         />
-        <button type='submit'>검색</button>
+        <button type='submit'>
+          <Search className='h-5 w-5 text-slate-50' />
+        </button>
       </form>
     </div>
   );

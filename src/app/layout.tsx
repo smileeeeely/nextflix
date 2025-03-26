@@ -1,7 +1,15 @@
 import './globals.css';
-import HeaderLayout from '@/app/HeaderLayout';
-import FooterLayout from '@/app/FooterLayout';
+import HeaderLayout from '@/components/layout/HeaderLayout';
+import FooterLayout from '@/components/layout/FooterLayout';
 import Provider from '@/app/Provider';
+
+export const metadata = {
+  title: 'NEXTFLIX',
+  description: '당신이 찾는 영화는 모두 여기에',
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -13,7 +21,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <HeaderLayout />
         <Provider>
-          <main className='mx-auto max-w-[1200px]'>{children}</main>
+          <main className='mx-auto min-h-[calc(100vh-70px-145px)] max-w-[1200px]'>{children}</main>
         </Provider>
         <FooterLayout />
       </body>
