@@ -5,7 +5,6 @@ import Info from '@/components/detail/Info';
 import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { DetailMovie } from '@/types/DetailMovie';
-import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
@@ -13,6 +12,8 @@ import MovieComments from '@/components/detail/MovieComments';
 import InputComment from '@/components/detail/InputComment';
 import BookmarkBtn from '@/components/detail/BookmarkBtn';
 import { getIsBookmark } from '@/services/detail/serviceBookmarks';
+import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
+import { useAuthStore } from '@/store/useAuthStore';
 
 interface Props {
   params: {
@@ -27,18 +28,14 @@ const DetailPage = ({ params }: Props) => {
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [isBookmarked, setBookmarked] = useState(false);
 
-  const mok_user = {
-    nickname: 'test1',
-    email: 'test1@test.com',
-    id: '6538aa12-c21b-416b-ac67-3c071829ecde',
-  };
+  const { isSignedIn, user } = useAuthStore();
 
   // Insert Handler
   const onSubmitCommentsHandler = (comment: Comment) => {
     setComments((prev) =>
       prev
-        ? [...prev, { ...comment, users: { nickname: mok_user.nickname } }]
-        : [{ ...comment, users: { nickname: mok_user.nickname } }]
+        ? [...prev, { ...comment, users: { nickname: user!.nickname } }]
+        : [{ ...comment, users: { nickname: user!.nickname } }]
     );
   };
 
@@ -58,11 +55,11 @@ const DetailPage = ({ params }: Props) => {
         getMovieDetails(params.id),
         getMovieVideo(params.id),
         getMovieComments(params.id),
-        getIsBookmark({ movie_id: params.id, user_id: mok_user.id }),
+        isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
       ]);
 
       if (_movie.poster_path) {
-        setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
+        setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
       }
 
       setMovie(_movie);
@@ -84,10 +81,10 @@ const DetailPage = ({ params }: Props) => {
         {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
-      <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />
+      {isSignedIn && <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />}
       <Info movie={movie} />
       {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
-      <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />
+      {isSignedIn && <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />}
     </section>
   );
 };

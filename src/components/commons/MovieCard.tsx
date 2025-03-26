@@ -3,8 +3,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScoreDonut from '@/components/commons/ScoreDonut';
-import { IMG_BASE_URL } from '@/constants/movieCategory';
 import { formatDateSimple } from '@/utils/formatFunction';
+import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 
 type MovieCardProps = {
   movie: Movie;
@@ -22,7 +22,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       <Link href={`/detail/${movie.id}`}>
         <div className='relative aspect-[2/3] cursor-pointer'>
           <Image
-            src={`${IMG_BASE_URL}t/p/w300${movie.poster_path}`}
+            src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
             alt={movie.title}
             fill
             sizes='(max-width: 640px) 100vw, 20vw'
