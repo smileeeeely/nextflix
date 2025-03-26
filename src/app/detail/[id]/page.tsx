@@ -11,6 +11,7 @@ import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
 import MovieComments from '@/components/detail/MovieComments';
 import InputComment from '@/components/detail/InputComment';
+import BookmarkBtn from '@/components/detail/BookmarkBtn';
 
 interface Props {
   params: {
@@ -74,6 +75,7 @@ const DetailPage = ({ params }: Props) => {
         {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
+      <BookmarkBtn />
       <Info movie={movie} />
       {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
       <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />
