@@ -31,7 +31,7 @@ const CategorySection = ({ categoryName, movies }: CategorySectionProps) => {
         {movies.map((movie) => (
           // 카드컴포넌트 영역 , 각 영화 id로 상세페이지 이동
           <li key={movie.id} className='relative mb-4 w-40 flex-none text-center'>
-            {/* 포스터 영역 */}
+            {/* 포스터 영역 동일한 비율로 나타내기 위해 부모태그에 w-40 필요*/}
             <MovieCard movie={movie} />
           </li>
         ))}
