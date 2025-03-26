@@ -21,7 +21,7 @@ export interface SpokenLanguage {
   name: string;
 }
 
-export interface Movie {
+export interface DetailMovie {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: any | null;

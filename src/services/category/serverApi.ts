@@ -1,6 +1,8 @@
 'use server';
-import { ApiResponse } from '@/types/category/movie';
+
 import { API_LANGUAGE, API_PAGE, CACHE_PAGE, CATEGORY_ENDPOINTS, ONE_DAY_SECONDS } from '@/constants/movieCategory';
+import { PaginatedResponse } from '@/types/Movie';
+import { Movie } from '@/types/Movie';
 
 const options = {
   method: 'GET',
@@ -11,7 +13,7 @@ const options = {
 };
 
 // NowPlaying
-export const getNowPlaying = async (page: number = API_PAGE): Promise<ApiResponse> => {
+export const getNowPlaying = async (page: number = API_PAGE): Promise<PaginatedResponse<Movie>> => {
   const TMDB_NOW_PLAYING_API = `${CATEGORY_ENDPOINTS.now_playing}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_NOW_PLAYING_API, {
     ...options,
@@ -23,7 +25,7 @@ export const getNowPlaying = async (page: number = API_PAGE): Promise<ApiRespons
 };
 
 // Popular
-export const getPopular = async (page: number = API_PAGE): Promise<ApiResponse> => {
+export const getPopular = async (page: number = API_PAGE): Promise<PaginatedResponse<Movie>> => {
   const TMDB_POPULAR_API = `${CATEGORY_ENDPOINTS.popular}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_POPULAR_API, {
     ...options,
@@ -35,7 +37,7 @@ export const getPopular = async (page: number = API_PAGE): Promise<ApiResponse> 
 };
 
 // TopRated
-export const getTopRated = async (page: number = API_PAGE): Promise<ApiResponse> => {
+export const getTopRated = async (page: number = API_PAGE): Promise<PaginatedResponse<Movie>> => {
   const TMDB_TOP_RATED_API = `${CATEGORY_ENDPOINTS.top_rated}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_TOP_RATED_API, {
     ...options,
@@ -46,7 +48,7 @@ export const getTopRated = async (page: number = API_PAGE): Promise<ApiResponse>
   return data;
 };
 
-export const getUpcoming = async (page: number = API_PAGE): Promise<ApiResponse> => {
+export const getUpcoming = async (page: number = API_PAGE): Promise<PaginatedResponse<Movie>> => {
   const TMDB_UPCOMING_API = `${CATEGORY_ENDPOINTS.upcoming}?language=${API_LANGUAGE}&page=${page}`;
   const res = await fetch(TMDB_UPCOMING_API, {
     ...options,
