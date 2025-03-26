@@ -20,7 +20,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
     <Card>
       {/* 상세페이지로 이동 */}
       <Link href={`/detail/${movie.id}`}>
-        <div className='relative cursor-pointer' style={{ aspectRatio: '2/3' }}>
+        <div className='relative aspect-[2/3] cursor-pointer'>
           <Image
             src={`${IMG_BASE_URL}t/p/w300${movie.poster_path}`}
             alt={movie.title}
