@@ -4,7 +4,7 @@ import { signInSupabase } from '@/services/signIn';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 const SignInForm = () => {
   const router = useRouter();
