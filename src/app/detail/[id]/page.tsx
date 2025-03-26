@@ -4,7 +4,7 @@ import Poster from '@/components/detail/Poster';
 import Info from '@/components/detail/Info';
 import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
-import { Movie } from '@/types/DetailMovie';
+import { DetailMovie } from '@/types/DetailMovie';
 import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getMovieComments } from '@/services/detail/serviceComments';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const DetailPage = ({ params }: Props) => {
-  const [movie, setMovie] = useState<Movie | null>(null);
+  const [movie, setMovie] = useState<DetailMovie | null>(null);
   const [src, setSrc] = useState<string>('');
   const [videoLink, setVideoLink] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[] | null>(null);
