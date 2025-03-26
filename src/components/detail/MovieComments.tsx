@@ -3,6 +3,7 @@ import { formatDateFull } from '@/utils/formatFunction';
 import WrapperBox from '@/components/detail/WrapperBox';
 import { Button } from '@/components/ui/button';
 import { deleteMovieComment } from '@/services/detail/serviceComments';
+import { useAuthStore } from '@/store/useAuthStore';
 
 interface Props {
   comments: Comment[];
@@ -10,14 +11,7 @@ interface Props {
 }
 
 const MovieComments = ({ comments, onDelete }: Props) => {
-  //TODO: 추후에 상태관리로 유저 로그인 정보 받아오기
-  const isLogin = true;
-
-  const mok_user = {
-    nickname: 'test1',
-    email: 'test1@test.com',
-    id: '6538aa12-c21b-416b-ac67-3c071829ecde',
-  };
+  const { isSignedIn, user } = useAuthStore();
 
   const handleDeleteComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const commentId = e.currentTarget.value;
@@ -34,7 +28,8 @@ const MovieComments = ({ comments, onDelete }: Props) => {
             <p className='flex justify-end'>
               {comment.users?.nickname} · {formatDateFull(comment.created_at)}
             </p>
-            {isLogin && comment.user_id === mok_user.id ? (
+            {/* TODO: user id 설정  */}
+            {isSignedIn && comment.user_id === 'user.id' ? (
               <div className='mt-[10px] flex justify-end'>
                 <Button value={comment.id} onClick={handleDeleteComment} className='h-[25px] hover:bg-[#e6354f]'>
                   삭제
