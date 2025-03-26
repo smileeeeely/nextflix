@@ -8,7 +8,7 @@ const IntroPage = () => {
     <div className='px-40 max-lg:px-20 max-sm:px-10'>
       <div className='flex h-screen flex-col items-center justify-center gap-10'>
         <MoviesSearch />
-        <Link href='/category'>바로가기</Link>
+        <Link href='/home'>바로가기</Link>
       </div>
     </div>
   );
