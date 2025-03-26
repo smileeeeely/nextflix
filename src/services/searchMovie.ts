@@ -6,7 +6,7 @@ const BASE_NUMBER = 0;
 
 // 검색어와 페이지 값 받아서 라우트 핸들러로 전달
 export const fetchSearchMovies = async ({ input, page = PARAM_NUMBER }: { input: string; page: number }) => {
-  const URL = `http://localhost:3000/api/search?title=${input}&page=${page}`; //TODO 배포 후 환경변수로 뺄 것
+  const URL = `/api/search?title=${input}&page=${page}`;
   const res = await fetch(URL);
   const data: PaginatedResponse<Movie> = await res.json();
   return data;
