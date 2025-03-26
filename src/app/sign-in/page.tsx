@@ -1,8 +1,17 @@
 import SignInForm from '@/components/commons/SignInForm';
+import { checkSession } from '@/services/signIn';
+
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
-const signInPage = () => {
+const signInPage = async () => {
+  const userData = await checkSession();
+
+  if (userData) {
+    redirect('/home');
+  }
+
   return (
     <div className='mt-[100px] flex flex-col items-center'>
       <SignInForm />
