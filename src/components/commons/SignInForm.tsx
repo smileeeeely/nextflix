@@ -7,6 +7,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { ALERT_TYPE } from '@/constants/alertType';
 import { openAlert } from '@/lib/openAlert';
+import { EMAIL, PASSWORD } from '@/constants/signUp';
 
 const SignInForm = () => {
   const { ERROR, SUCCESS } = ALERT_TYPE;
@@ -47,7 +48,7 @@ const SignInForm = () => {
           className='m-3 w-[270px] rounded-md p-2'
           type='email'
           placeholder='email'
-          {...register('email', {
+          {...register(EMAIL, {
             required: { value: true, message: '아이디를 입력하세요' },
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -63,7 +64,7 @@ const SignInForm = () => {
           className='m-3 w-[270px] rounded-md p-2'
           type='password'
           placeholder='password'
-          {...register('password', {
+          {...register(PASSWORD, {
             required: { value: true, message: '비밀번호를 입력하세요' },
             pattern: {
               value: /^.{6,}$/,
