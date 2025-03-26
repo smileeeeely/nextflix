@@ -5,7 +5,6 @@ import Info from '@/components/detail/Info';
 import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
 import { DetailMovie } from '@/types/DetailMovie';
-import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
@@ -13,6 +12,7 @@ import MovieComments from '@/components/detail/MovieComments';
 import InputComment from '@/components/detail/InputComment';
 import BookmarkBtn from '@/components/detail/BookmarkBtn';
 import { getIsBookmark } from '@/services/detail/serviceBookmarks';
+import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 
 interface Props {
   params: {
@@ -62,7 +62,7 @@ const DetailPage = ({ params }: Props) => {
       ]);
 
       if (_movie.poster_path) {
-        setSrc(`${TMDB_IMG_URL}/${_movie.poster_path}`);
+        setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
       }
 
       setMovie(_movie);
