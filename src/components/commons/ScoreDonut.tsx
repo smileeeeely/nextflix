@@ -23,8 +23,8 @@ const ScoreDonut = ({ score }: ScoreDonutProps) => {
   return (
     <div className='relative h-9 w-9'>
       <svg viewBox='0 0 64 64' className='h-9 w-9'>
-        {/* 회색으로 꽉 채워진 배경 원 */}
-        <circle cx={centerX} cy={centerY} r={radius} fill='#2c2c2c' />
+        {/* 회색으로 꽉 채워진 배경 원  */}
+        <circle cx={centerX} cy={centerY} r={centerX} fill='#2c2c2c' />
         {/* 회색 배경 도넛 원 */}
         <circle
           className='text-gray-300'
