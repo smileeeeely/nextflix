@@ -11,6 +11,7 @@ interface AuthState {
 interface User {
   email: string;
   nickname: string;
+  id: number;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -20,7 +21,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   signIn: async (email: string) => {
     const userData = await getUserByEmail(email); //supabase에서 userData 가져오기
     if (!userData) return;
-    set({ isSignedIn: true, user: { email, nickname: userData.nickname } }); //로그인 한 유저 정보 담음
+    set({ isSignedIn: true, user: { email: userData.email, nickname: userData.nickname, id: userData.id } }); //로그인 한 유저 정보 담음
   },
   // 로그아웃 함수
   logout: async () => {
