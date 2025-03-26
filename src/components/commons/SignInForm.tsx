@@ -1,10 +1,11 @@
 'use client';
 
-import { signInSupabase } from '@/services/signIn';
+import { signInSupabase, test } from '@/services/signIn';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/utils/supabaseClient';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -16,9 +17,8 @@ const SignInForm = () => {
       const data = await signInSupabase({ email, password }); //서버 액션 함수 호출
       if (data) {
         localStorage.setItem('auth_token', data.session.access_token); //로컬스토리지에 토큰 저장
-        useAuthStore.getState().signIn(email); //로그인 상태 전역 업데이트
+        useAuthStore.getState().signIn(data.user.email as string); //로그인 상태 전역 업데이트
       }
-      console.log('data', data);
       alert('로그인되었습니다.');
       router.push('/home'); //로그인 성공 시 홈으로 이동
     } catch (error) {
