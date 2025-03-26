@@ -1,7 +1,7 @@
 import './globals.css';
-import HeaderLayout from './HeaderLayout';
-import FooterLayout from './FooterLayout';
-import Provider from './Provider';
+import HeaderLayout from '@/app/HeaderLayout';
+import FooterLayout from '@/app/FooterLayout';
+import Provider from '@/app/Provider';
 
 export default function RootLayout({
   children,
