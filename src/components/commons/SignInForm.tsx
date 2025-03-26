@@ -5,6 +5,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import { HOME } from '@/constants/pagePath';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SignInForm = () => {
         useAuthStore.getState().signIn(data.user.email as string); //로그인 상태 전역 업데이트
       }
       alert('로그인되었습니다.');
-      router.push('/home'); //로그인 성공 시 홈으로 이동
+      router.push(HOME); //로그인 성공 시 홈으로 이동
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('로그인에 실패하였습니다.');
