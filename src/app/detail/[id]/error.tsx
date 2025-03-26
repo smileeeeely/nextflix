@@ -1,6 +1,5 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
 const error = ({ error }: { error: Error & { digest?: string } }) => {
   const { push } = useRouter();
