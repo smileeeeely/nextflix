@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-const error = ({ error }: { error: Error & { digest?: string } }) => {
+const Error = ({ error }: { error: Error & { digest?: string } }) => {
   const { push } = useRouter();
   return (
     <section className='max-w-custom container m-auto grid min-h-[calc(100vh-70px-145px)] place-items-center text-center'>
@@ -18,4 +18,4 @@ const error = ({ error }: { error: Error & { digest?: string } }) => {
     </section>
   );
 };
-export default error;
+export default Error;

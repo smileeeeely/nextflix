@@ -6,7 +6,7 @@ import { Bookmark } from 'lucide-react';
 
 interface Props {
   isBookmarked: boolean;
-  onClick: Function;
+  onClick: () => void;
   movie_id: number;
 }
 
