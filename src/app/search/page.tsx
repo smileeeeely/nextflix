@@ -38,7 +38,7 @@ const SearchPage = () => {
                 <div className='w-40 cursor-pointer'>
                   {movie.poster_path ? (
                     <Image
-                      src={`${TMDB_IMG_URL}t/p/w300${movie.poster_path}`}
+                      src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
                       alt={movie.title}
                       width={150}
                       height={225}

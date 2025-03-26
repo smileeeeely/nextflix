@@ -22,7 +22,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       <Link href={`/detail/${movie.id}`}>
         <div className='relative aspect-[2/3] cursor-pointer'>
           <Image
-            src={`${TMDB_IMG_URL}t/p/w300${movie.poster_path}`}
+            src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
             alt={movie.title}
             fill
             sizes='(max-width: 640px) 100vw, 20vw'
