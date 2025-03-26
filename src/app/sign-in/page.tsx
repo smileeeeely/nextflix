@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 const signInPage = async () => {
   const userData = await checkSession();
+  console.log('userData', userData);
 
   if (userData) {
     redirect(HOME);
