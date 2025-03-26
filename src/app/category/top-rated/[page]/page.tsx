@@ -1,4 +1,4 @@
-import PageNationBtn from '@/components/pageNationBtn';
+import PageNationBtn from '@/components/category/pageNationBtn';
 import { Movie, PaginatedResponse } from '@/types/Movie';
 import { getTopRated } from '@/services/category/serverApi';
 import React from 'react';

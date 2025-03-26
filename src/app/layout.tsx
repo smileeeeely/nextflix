@@ -1,7 +1,6 @@
 import './globals.css';
 import HeaderLayout from './HeaderLayout';
 import FooterLayout from './FooterLayout';
-import AppLayout from '@/components/appLayout';
 import Provider from '@/app/Provider';
 import useAuthListener from '@/hooks/useAuthListener';
 
@@ -17,9 +16,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <HeaderLayout />
         <Provider>
-          <AppLayout>
-            <main className='mx-auto max-w-[1200px]'>{children}</main>
-          </AppLayout>
+          <main className='mx-auto max-w-[1200px]'>{children}</main>
         </Provider>
         <FooterLayout />
       </body>
