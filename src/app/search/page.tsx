@@ -1,13 +1,10 @@
 'use client';
 import { useSearchMovies } from '@/services/searchMovie';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import noImage from '@images/images/noImage.png';
-import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { Movie } from '@/types/Movie';
 import { useInView } from 'react-intersection-observer';
+import MovieCard from '@/components/commons/MovieCard';
 
 const SearchPage = () => {
   const params = useSearchParams();
@@ -24,6 +21,7 @@ const SearchPage = () => {
     setSearchInput(input);
   }, [params, searchInput]);
 
+  // 검색어에 따른 데이터 가져오기
   const { data, isPending, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useSearchMovies({ searchInput });
   useEffect(() => {
     if (data?.pages) {
@@ -32,6 +30,7 @@ const SearchPage = () => {
     }
   }, [data]);
 
+  // 스크롤이 바닥에 닿은 경우 다음 페이지 가져오기
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -50,40 +49,9 @@ const SearchPage = () => {
       <ul className='grid grid-cols-6 gap-4'>
         {movies.map((movie) => {
           return (
-            <li key={movie.id}>
-              <Link href={`/detail/${movie.id}`}>
-                <div className='w-40 cursor-pointer'>
-                  {movie.poster_path ? (
-                    <Image
-                      src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
-                      alt={movie.title}
-                      width={150}
-                      height={225}
-                      className='rounded-md'
-                    />
-                  ) : (
-                    <div className='relative cursor-pointer' style={{ aspectRatio: '2/3' }}>
-                      <Image
-                        src={noImage}
-                        alt='noImage'
-                        fill
-                        sizes='(max-width: 640px) 100vw, 20vw'
-                        className='rounded-md object-cover'
-                      />
-                    </div>
-                  )}
-                  <p>{movie.vote_average.toFixed(1)}</p>
-                </div>
-              </Link>
-              <h3 className='mt-2 text-base font-semibold'>{movie.title}</h3>
-              <p className='text-sm text-gray-400'>
-                {new Date(movie.release_date).toLocaleDateString('ko-KR', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-            </li>
+            <div key={movie.id} className='mx-auto w-40 place-content-center'>
+              <MovieCard movie={movie} />
+            </div>
           );
         })}
       </ul>
