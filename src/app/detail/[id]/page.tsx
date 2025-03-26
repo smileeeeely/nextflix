@@ -14,6 +14,7 @@ import BookmarkBtn from '@/components/detail/BookmarkBtn';
 import { getIsBookmark } from '@/services/detail/serviceBookmarks';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { useAuthStore } from '@/store/useAuthStore';
+import Loading from '@/app/loading';
 
 interface Props {
   params: {
@@ -71,7 +72,7 @@ const DetailPage = ({ params }: Props) => {
   }, []);
 
   if (!movie) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
