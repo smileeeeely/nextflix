@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { Movie } from '@/types/Movie';
 import { useInView } from 'react-intersection-observer';
 import MovieCard from '@/components/commons/MovieCard';
+import { ALERT_TYPE } from '@/constants/alertType';
+import { openAlert } from '@/lib/openAlert';
 
 const SearchPage = () => {
   const params = useSearchParams();
@@ -16,7 +18,9 @@ const SearchPage = () => {
   useEffect(() => {
     const input = params.get('title');
     if (!input) {
-      return alert('검색 값을 정확히 입력해 주세요');
+      const { ERROR } = ALERT_TYPE;
+      openAlert({ type: ERROR, text: '검색 값을 정확히 입력해 주세요' });
+      return;
     }
     setSearchInput(input);
   }, [params, searchInput]);
