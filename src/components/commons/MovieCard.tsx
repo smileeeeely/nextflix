@@ -9,7 +9,6 @@ import { Movie } from '@/types/Movie';
 
 type MovieCardProps = {
   movie: DetailMovie | Movie;
-  // my-page > fetchBookmarkedMovies 함수 부분에서 getMovieDetails 함수를 사용하여 유저의 북마크 목록을 뿌려줘야 하는데, MovieCard 컴포넌트와 getMovieDetails 함수에서 타입 오류로 인해 유니온 타입을 사용함
 };
 
 const MovieCard = ({ movie }: MovieCardProps) => {
@@ -18,13 +17,16 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   // yyyy년 m월 d일 형식의 날짜 포멧팅
   const formattedDate = formatDateSimple(movie.release_date);
 
+  // poster_path가 유효하지 않으면 noimage.png 사용
+  const posterSrc = movie.poster_path ? `${TMDB_IMG_URL}/t/p/w300${movie.poster_path}` : '/images/noImage.png';
+
   return (
     <Card>
       {/* 상세페이지로 이동 */}
       <Link href={`/detail/${movie.id}`}>
         <div className='relative aspect-[2/3] cursor-pointer'>
           <Image
-            src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
+            src={posterSrc}
             alt={movie.title}
             fill
             sizes='(max-width: 640px) 100vw, 20vw'
