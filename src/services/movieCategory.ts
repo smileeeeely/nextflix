@@ -1,3 +1,4 @@
+'use server';
 import { API_LANGUAGE, API_PAGE, CATEGORY_ENDPOINTS } from '@/constants/movieCategory';
 import { MoviesResponse } from '@/types/Movie';
 

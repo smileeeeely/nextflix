@@ -12,7 +12,7 @@ const NotFound = () => {
           <p className='mt-4 text-xl'>요청하신 페이지가 존재하지 않거나 경로가 잘못되었습니다.</p>
         </div>
         <div>
-          <Link href={'/'}>
+          <Link href={'/home'}>
             <button className='border-primary rounded-md border px-3 py-2 font-semibold'>Go Home</button>
           </Link>
           <button

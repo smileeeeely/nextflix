@@ -1,5 +1,5 @@
 import { Comment } from '@/types/Comment';
-import { formatDate } from '@/utils/formatFunction';
+import { formatDateFull } from '@/utils/formatFunction';
 import WrapperBox from '@/components/detail/WrapperBox';
 import { Button } from '@/components/ui/button';
 import { deleteMovieComment } from '@/services/detail/serviceComments';
@@ -32,7 +32,7 @@ const MovieComments = ({ comments, onDelete }: Props) => {
           <WrapperBox key={comment.id}>
             <p>{comment.content}</p>
             <p className='flex justify-end'>
-              {comment.users?.nickname} · {formatDate(comment.created_at)}
+              {comment.users?.nickname} · {formatDateFull(comment.created_at)}
             </p>
             {isLogin && comment.user_id === mok_user.id ? (
               <div className='mt-[10px] flex justify-end'>
