@@ -1,6 +1,6 @@
 import { Movie } from '@/types/Movie';
 import Link from 'next/link';
-import MovieCard from '../commons/MovieCard';
+import MovieCard from '@/components/commons/MovieCard';
 
 interface CategorySectionProps {
   categoryName: string;
