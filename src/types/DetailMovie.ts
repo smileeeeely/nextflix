@@ -21,6 +21,13 @@ export interface SpokenLanguage {
   name: string;
 }
 
+export interface ErrorMessage {
+  success: boolean;
+  status_code?: number;
+  status_message?: string;
+  digest?: string;
+}
+
 export interface DetailMovie {
   adult: boolean;
   backdrop_path: string;

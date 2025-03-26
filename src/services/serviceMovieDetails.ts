@@ -2,10 +2,18 @@
 
 import { YOUTUBE_BASE_URL } from '@/constants/movieVideoUrl';
 import { TMDB_BASE_URL } from '@/constants/tmdbBaseUrl';
-import { DetailMovie } from '@/types/DetailMovie';
-import { MovieVideos, Video } from '@/types/Video';
+import { DetailMovie, ErrorMessage } from '@/types/DetailMovie';
+import { MovieVideos } from '@/types/Video';
+import { containsOnlyNumbers } from '@/utils/formatFunction';
 
 export const getMovieDetails = async (id: number): Promise<DetailMovie> => {
+  if (!containsOnlyNumbers(id)) {
+    throw {
+      success: false,
+      status_message: 'movie_id 오류',
+    } as ErrorMessage;
+  }
+
   const res = await fetch(`${TMDB_BASE_URL}/${id}?language=ko`, {
     method: 'GET',
     headers: {
@@ -13,9 +21,13 @@ export const getMovieDetails = async (id: number): Promise<DetailMovie> => {
       Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
     },
   });
-  const data: DetailMovie = await res.json();
 
-  return data;
+  const data = await res.json();
+  if (res.status !== 200) {
+    throw data as ErrorMessage;
+  }
+
+  return data as DetailMovie;
 };
 
 export const getMovieVideo = async (id: number): Promise<string | null> => {
@@ -26,6 +38,12 @@ export const getMovieVideo = async (id: number): Promise<string | null> => {
       Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
     },
   });
+
+  if (res.status !== 200) {
+    throw {
+      success: false,
+    } as ErrorMessage;
+  }
   const data: MovieVideos = await res.json();
 
   if (data.results) {

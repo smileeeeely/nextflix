@@ -4,7 +4,7 @@ import Poster from '@/components/detail/Poster';
 import Info from '@/components/detail/Info';
 import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
-import { DetailMovie } from '@/types/DetailMovie';
+import { DetailMovie, ErrorMessage } from '@/types/DetailMovie';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
@@ -15,6 +15,9 @@ import { getIsBookmark } from '@/services/detail/serviceBookmarks';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { useAuthStore } from '@/store/useAuthStore';
 import Loading from '@/app/loading';
+import NotFound from '@/app/not-found';
+import { openAlert } from '@/lib/openAlert';
+import { ALERT_TYPE } from '@/constants/alertType';
 
 interface Props {
   params: {
@@ -23,11 +26,12 @@ interface Props {
 }
 
 const DetailPage = ({ params }: Props) => {
-  const [movie, setMovie] = useState<DetailMovie | null>(null);
+  const [movie, setMovie] = useState<DetailMovie>();
   const [src, setSrc] = useState<string>('');
   const [videoLink, setVideoLink] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [isBookmarked, setBookmarked] = useState(false);
+  const [isError, setError] = useState(false);
 
   const { isSignedIn, user } = useAuthStore();
 
@@ -52,24 +56,34 @@ const DetailPage = ({ params }: Props) => {
 
   useEffect(() => {
     const dataFetch = async () => {
-      const [_movie, _videoLink, _comments, _isBookmarked] = await Promise.all([
-        getMovieDetails(params.id),
-        getMovieVideo(params.id),
-        getMovieComments(params.id),
-        isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
-      ]);
+      try {
+        const [_movie, _videoLink, _comments, _isBookmarked] = await Promise.all([
+          getMovieDetails(params.id),
+          getMovieVideo(params.id),
+          getMovieComments(params.id),
+          isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
+        ]);
 
-      if (_movie.poster_path) {
-        setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
+        if (_movie.poster_path) {
+          setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
+        }
+
+        setMovie(_movie);
+        setVideoLink(_videoLink);
+        setComments(_comments);
+        setBookmarked(_isBookmarked);
+      } catch (e) {
+        setError(true);
       }
-
-      setMovie(_movie);
-      setVideoLink(_videoLink);
-      setComments(_comments);
-      setBookmarked(_isBookmarked);
     };
     dataFetch();
   }, []);
+
+  if (isError) {
+    const { ERROR } = ALERT_TYPE;
+    openAlert({ type: ERROR, text: '서버 요청 오류' });
+    return <NotFound />;
+  }
 
   if (!movie) {
     return <Loading />;
