@@ -1,5 +1,5 @@
 import PageNationBtn from '@/components/pageNationBtn';
-import { Movie } from '@/types/category/movie';
+import { Movie } from '@/types/Movie';
 import { getNowPlaying } from '@/services/category/serverApi';
 import React from 'react';
 import MovieCard from '@/components/commons/MovieCard';
