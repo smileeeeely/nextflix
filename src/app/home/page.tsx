@@ -52,7 +52,8 @@ const Category = async () => {
             <CategorySection categoryName={category.name} movies={category.movies} />
           ) : (
             <h3 className='p-10 text-center text-xl font-semibold'>
-              {category.name} 데이터를 불러오는데 실패했습니다.
+              {/* 에러처리 추가 */}
+              {category.name} 영화 데이터를 불러오는데 실패했습니다.
             </h3>
           )}
         </Suspense>
