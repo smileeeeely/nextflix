@@ -7,7 +7,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 
 const SignInForm = () => {
   const router = useRouter();
-  const { register, handleSubmit, formState } = useForm<FieldValues>({ mode: 'onBlur' }); //훅 폼 사용
+  const { register, handleSubmit, formState } = useForm<FieldValues>({ mode: 'onChange' }); //훅 폼 사용
 
   const onSubmit = async (value: FieldValues) => {
     try {
