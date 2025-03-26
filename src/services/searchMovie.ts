@@ -1,5 +1,5 @@
 import { Movie, PaginatedResponse } from '@/types/Movie';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 export const fetchSearchMovies = async ({ input, page = 1 }: { input: string; page: number }) => {
   const URL = `http://localhost:3000/api/search?title=${input}&page=${page}`;
@@ -9,10 +9,11 @@ export const fetchSearchMovies = async ({ input, page = 1 }: { input: string; pa
 };
 
 export const useSearchMovies = ({ searchInput = '' }: { searchInput?: string }) => {
-  return useInfiniteQuery({
-    queryKey: ['searchedMovies', searchInput],
-    queryFn: ({ pageParam = 1 }) => fetchSearchMovies({ input: searchInput, page: pageParam }),
-    getNextPageParam: (lastPage) => {
+  return useInfiniteQuery<PaginatedResponse<Movie>, Error, InfiniteData<PaginatedResponse<Movie>>, string[], number>({
+    queryKey: ['useSearchMovies'],
+    initialPageParam: 1,
+    queryFn: ({ pageParam }) => fetchSearchMovies({ input: searchInput, page: pageParam }),
+    getNextPageParam: (lastPage: PaginatedResponse<Movie>) => {
       return lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined;
     },
     enabled: searchInput.trim().length > 0,

@@ -3,11 +3,12 @@ import { useSearchMovies } from '@/services/searchMovie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import noImage from '@images/images/noImage.png';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { Movie } from '@/types/Movie';
 import { useInView } from 'react-intersection-observer';
+
 const SearchPage = () => {
   const params = useSearchParams();
   const [searchInput, setSearchInput] = useState('');
@@ -21,7 +22,7 @@ const SearchPage = () => {
       return alert('검색 값을 정확히 입력해 주세요');
     }
     setSearchInput(input);
-  }, [params]);
+  }, [params, searchInput]);
 
   const { data, isPending, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useSearchMovies({ searchInput });
   useEffect(() => {
