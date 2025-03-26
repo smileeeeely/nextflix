@@ -1,12 +1,12 @@
-import { Movie } from '@/types/DetailMovie';
+import { DetailMovie } from '@/types/DetailMovie';
 import { formatOverview } from '@/utils/formatFunction';
 import Image from 'next/image';
 import WrapperBox from '@/components/detail/WrapperBox';
-// import { TMDB_IMG_URL } from '@/constants/tmdbConstants';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
+import { Badge } from '@/components/ui/badge';
 
 interface Props {
-  movie: Movie;
+  movie: DetailMovie;
 }
 
 const Info = ({ movie }: Props) => {
@@ -19,8 +19,11 @@ const Info = ({ movie }: Props) => {
         <div className='flex flex-row items-baseline'>
           <h1 className='mr-[20px] text-[40px]'>{movie.title}</h1>
           {movie.genres.map((genre) => {
-            // TODO: 추후 genre component 적용
-            return <p key={genre.id}>{genre.name}</p>;
+            return (
+              <Badge className='ml-[5px]' key={genre.id}>
+                {genre.name}
+              </Badge>
+            );
           })}
         </div>
         <ul className='flex items-baseline gap-[10px] text-[22px]'>
@@ -54,7 +57,7 @@ const Info = ({ movie }: Props) => {
                 {company.logo_path ? (
                   <Image
                     src={TMDB_IMG_URL + '/t/p/w300' + company.logo_path}
-                    width={200}
+                    width={120}
                     height={100}
                     alt={company.name}
                   />

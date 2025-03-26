@@ -1,13 +1,15 @@
-import { Movie } from '@/types/Movie';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScoreDonut from '@/components/commons/ScoreDonut';
 import { formatDateSimple } from '@/utils/formatFunction';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
+import { DetailMovie } from '@/types/DetailMovie';
+import { Movie } from '@/types/Movie';
 
 type MovieCardProps = {
-  movie: Movie;
+  movie: DetailMovie | Movie;
+  // my-page > fetchBookmarkedMovies 함수 부분에서 getMovieDetails 함수를 사용하여 유저의 북마크 목록을 뿌려줘야 하는데, MovieCard 컴포넌트와 getMovieDetails 함수에서 타입 오류로 인해 유니온 타입을 사용함
 };
 
 const MovieCard = ({ movie }: MovieCardProps) => {

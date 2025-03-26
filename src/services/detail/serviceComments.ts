@@ -13,8 +13,9 @@ export const getMovieComments = async (movieId: number): Promise<Comment[] | nul
     )
     .eq('movie_id', movieId);
 
-  // TODO: 추후 error 처리 필요
-  if (error) return null;
+  if (error) {
+    throw new Error('데이터 베이스 오류 : 댓글 GET');
+  }
 
   return comments;
 };
@@ -30,15 +31,16 @@ export const insertMovieComment = async ({
 }): Promise<Comment> => {
   const { data, error } = await supabase.from('comments').insert({ user_id, content, movie_id }).select();
 
-  // TODO: 추후 error 처리 필요
-  if (error) throw error;
-
+  if (error) {
+    throw new Error('데이터 베이스 오류 : 댓글 INSERT');
+  }
   return data[0];
 };
 
 export const deleteMovieComment = async (comment_id: string): Promise<void> => {
   const { error } = await supabase.from('comments').delete().eq('id', comment_id);
 
-  // TODO: 추후 error 처리 필요
-  if (error) throw error;
+  if (error) {
+    throw new Error('데이터 베이스 오류 : 댓글 DELETE');
+  }
 };

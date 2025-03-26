@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   link: string;
@@ -8,7 +9,9 @@ interface Props {
 const LinkBtn = ({ link, label }: Props) => {
   return (
     <section className='my-[20px]'>
-      <button onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}>{label}</button>
+      <Button className='hover:bg-[#e6354f]' onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}>
+        {label}
+      </Button>
     </section>
   );
 };
