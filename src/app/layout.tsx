@@ -1,6 +1,7 @@
 import './globals.css';
-import HeaderLayout from './HeaderLayout';
-import FooterLayout from './FooterLayout';
+import HeaderLayout from '@/app/HeaderLayout';
+import FooterLayout from '@/app/FooterLayout';
+import Provider from '@/app/Provider';
 
 export default function RootLayout({
   children,
@@ -11,7 +12,9 @@ export default function RootLayout({
     <html lang='ko'>
       <body className={`antialiased`}>
         <HeaderLayout />
-        <main className='mx-auto max-w-[1200px]'>{children}</main>
+        <Provider>
+          <main className='mx-auto max-w-[1200px]'>{children}</main>
+        </Provider>
         <FooterLayout />
       </body>
     </html>
