@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ALERT_TYPE } from '@/constants/alertType';
 import { openAlert } from '@/lib/openAlert';
 import { EMAIL, PASSWORD } from '@/constants/signUp';
+import { HOME } from '@/constants/pagePath';
 
 const SignInForm = () => {
   const { ERROR, SUCCESS } = ALERT_TYPE;
@@ -28,7 +29,7 @@ const SignInForm = () => {
         text: '로그인되었습니다.',
         buttonText: '확인',
       });
-      router.push('/home'); //로그인 성공 시 홈으로 이동
+      router.push(HOME); //로그인 성공 시 홈으로 이동
     } catch (error) {
       console.error('로그인 실패:', error);
       openAlert({

@@ -1,7 +1,6 @@
 import PageNationBtn from '@/components/category/pageNationBtn';
 import { Movie, PaginatedResponse } from '@/types/Movie';
 import { getUpcoming } from '@/services/category/serverApi';
-import React from 'react';
 import MovieCard from '@/components/commons/MovieCard';
 import { Metadata } from 'next';
 

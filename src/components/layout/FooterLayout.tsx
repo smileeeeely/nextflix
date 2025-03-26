@@ -1,6 +1,6 @@
 'use client';
 
-import Footer from '@/components/commons/Footer';
+import Footer from '@/components/layout/Footer';
 import { usePathname } from 'next/navigation';
 
 const FooterLayout = () => {

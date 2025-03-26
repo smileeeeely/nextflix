@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
 
@@ -7,6 +8,7 @@ const MoviesSearch = () => {
   const router = useRouter();
   let timerId: number | null = null;
 
+  const DEBOUNCE_TIME = 200;
   // 입력된 title 쿼리 파라미터로 전달하며 이동
   const handleTitle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,14 +21,14 @@ const MoviesSearch = () => {
       router.push(`/search?title=${encodeURIComponent(input)}`); //input값이 set되지 않았을 경우를 대비해 title로 전달
       setInput('');
       timerId = null;
-    }, 200);
+    }, DEBOUNCE_TIME);
   };
 
   //디바운싱으로 input의 마지막 값만 title에 set
   useEffect(() => {
     const debounce = setTimeout(() => {
       return setTitle(input);
-    }, 300);
+    }, DEBOUNCE_TIME);
     return () => clearTimeout(debounce);
   }, [input]);
 
@@ -40,7 +42,7 @@ const MoviesSearch = () => {
   }, [timerId]);
 
   return (
-    <div className='w-full'>
+    <div className='w-full max-w-[800px]'>
       <form onSubmit={handleTitle} className='flex items-center justify-between gap-10 max-md:gap-6'>
         <input
           type='text'
@@ -50,9 +52,11 @@ const MoviesSearch = () => {
           }}
           placeholder='영화 제목을 입력해주세요'
           required
-          className='w-full rounded-md bg-[#e6354f] p-4 text-black placeholder-black outline-none'
+          className='w-full rounded-md bg-[#e6354f] px-4 py-2 text-sm text-black placeholder-black outline-none'
         />
-        <button type='submit'>검색</button>
+        <button type='submit'>
+          <Search className='h-5 w-5 text-slate-50' />
+        </button>
       </form>
     </div>
   );

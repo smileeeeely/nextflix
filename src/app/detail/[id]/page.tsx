@@ -18,6 +18,7 @@ import Loading from '@/app/loading';
 import NotFound from '@/app/not-found';
 import { openAlert } from '@/lib/openAlert';
 import { ALERT_TYPE } from '@/constants/alertType';
+import ErrorPage from '@/app/detail/[id]/error';
 
 interface Props {
   params: {
@@ -83,8 +84,13 @@ const DetailPage = ({ params }: Props) => {
 
   if (isError) {
     const { ERROR } = ALERT_TYPE;
-    openAlert({ type: ERROR, text: errorMessage });
-    return <NotFound />;
+
+    if (errorMessage === 'movie id 오류!') {
+      openAlert({ type: ERROR, text: errorMessage });
+      return <NotFound />;
+    } else {
+      return <ErrorPage error={new Error(errorMessage)} />;
+    }
   }
 
   if (!movie) {
