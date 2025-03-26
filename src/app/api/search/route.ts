@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server';
 export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const input: string | null = searchParams.get('title');
+  const page: string | null = searchParams.get('page');
 
-  const FETCH_URL = `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=ko-KOR&page=1`;
+  const FETCH_URL = `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=ko-KOR&page=${page}`;
   try {
     const res = await fetch(FETCH_URL, {
       //겹치는 부분. 추후 리팩토링으로 병합

@@ -1,31 +1,47 @@
 'use client';
-import { Movie } from '@/types/Movie';
-import { fetchSearchMovies } from '@/services/searchMovie';
+import { useSearchMovies } from '@/services/searchMovie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import noImage from '@images/images/noImage.png';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
-
+import { Movie } from '@/types/Movie';
+import { useInView } from 'react-intersection-observer';
 const SearchPage = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const params = useSearchParams();
-  const input: string | null = params.get('title');
+  const [searchInput, setSearchInput] = useState('');
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [ref, inView] = useInView({ threshold: 0 });
 
   // 들어온 검색값이 없을 경우
-  if (!input) return alert('검색 값을 정확히 입력해 주세요');
+  useEffect(() => {
+    const input = params.get('title');
+    if (!input) {
+      return alert('검색 값을 정확히 입력해 주세요');
+    }
+    setSearchInput(input);
+  }, [params]);
+
+  const { data, isPending, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useSearchMovies({ searchInput });
+  useEffect(() => {
+    if (data?.pages) {
+      const movies = data.pages.flatMap((page) => page.results);
+      setMovies(movies);
+    }
+  }, [data]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const data: Movie[] = await fetchSearchMovies(input);
-      setMovies(data);
-    };
-    fetchMovies();
-  }, [input]);
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  if (!movies) {
-    return <div>로딩중...</div>;
+  if (isPending) {
+    return <div>데이터 불러오는 중...</div>;
+  }
+  if (isError) {
+    return <div>페이지에 문제가 생겼습니다</div>;
   }
 
   return (
@@ -70,8 +86,8 @@ const SearchPage = () => {
           );
         })}
       </ul>
+      <div ref={ref}>{isFetchingNextPage && <div>데이터 불러오는 중...</div>}</div>
     </div>
   );
 };
-
 export default SearchPage;
