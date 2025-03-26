@@ -34,3 +34,20 @@ export const getUserByEmail = async (email: string) => {
 export const logOutSupabase = async () => {
   await supabase.auth.signOut();
 };
+
+// supabase 세션 확인 서버 액션
+export const checkSession = async () => {
+  const { data } = await supabase.auth.getSession();
+
+  if (data?.session) {
+    const email = data.session.user.email;
+    const { data: userData, error } = await supabase.from('users').select('nickname').eq('email', email).single();
+
+    if (error) {
+      console.log('유저 정보 조회 실페', error.message);
+      return null;
+    }
+    return userData; //data가 있다면 userData
+  }
+  return null; //세션이 없다면 null
+};
