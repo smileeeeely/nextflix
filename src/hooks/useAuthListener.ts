@@ -1,10 +1,10 @@
 'use client';
 import { supabase } from '@/utils/supabaseClient';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 // 세션 만료/로그아웃 시 로그인 페이지로 이동
-export const useAuthListner = () => {
+const useAuthListener = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -23,5 +23,8 @@ export const useAuthListner = () => {
       authListener.subscription.unsubscribe(); //구독 해제
     };
   }, [router]);
+
   return null; //UI 렌더링 X
 };
+
+export default useAuthListener;
