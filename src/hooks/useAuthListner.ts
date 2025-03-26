@@ -1,4 +1,5 @@
 'use client';
+import { SIGNIN } from '@/constants/pagePath';
 import { supabase } from '@/utils/supabaseClient';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -11,7 +12,7 @@ export const useAuthListner = () => {
       if (event === 'SIGNED_OUT' || event === 'USER_UPDATED' || event === 'SESSION_EXPIRED') {
         console.log('세션 만료 또는 로그아웃 상태입니다.');
         localStorage.removeItem('auth_token');
-        router.push('/sign-in');
+        router.push(SIGNIN);
       }
     });
 

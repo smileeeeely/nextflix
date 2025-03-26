@@ -8,6 +8,7 @@ const MoviesSearch = () => {
   const router = useRouter();
   let timerId: number | null = null;
 
+  const DEBOUNCE_TIME = 200;
   // 입력된 title 쿼리 파라미터로 전달하며 이동
   const handleTitle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,14 +21,14 @@ const MoviesSearch = () => {
       router.push(`/search?title=${encodeURIComponent(input)}`); //input값이 set되지 않았을 경우를 대비해 title로 전달
       setInput('');
       timerId = null;
-    }, 200);
+    }, DEBOUNCE_TIME);
   };
 
   //디바운싱으로 input의 마지막 값만 title에 set
   useEffect(() => {
     const debounce = setTimeout(() => {
       return setTitle(input);
-    }, 300);
+    }, DEBOUNCE_TIME);
     return () => clearTimeout(debounce);
   }, [input]);
 

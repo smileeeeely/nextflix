@@ -1,4 +1,5 @@
 'use client';
+import { SIGNIN } from '@/constants/pagePath';
 import { EMAIL, NICKNAME, PASSWORD } from '@/constants/signUp';
 import { useSignUpSchema } from '@/hooks/useSignUpSchema';
 import { signUpSupabase } from '@/services/signUpSupabase';
@@ -26,7 +27,7 @@ const SignUpPage = () => {
       alert('회원가입에 실패했습니다.');
     } else {
       alert('회원가입이 성공적으로 완료되었습니다!');
-      router.push('/sign-in'); //TODO - 자동 로그인 구현
+      router.push(SIGNIN); //TODO - 자동 로그인 구현
     }
   };
   return (
@@ -58,7 +59,7 @@ const SignUpPage = () => {
             회원가입
           </button>
         </form>
-        <Link href={'/sign-in'}>이미 회원이신가요?</Link>
+        <Link href={SIGNIN}>이미 회원이신가요?</Link>
       </div>
     </div>
   );
