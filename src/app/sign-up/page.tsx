@@ -1,5 +1,5 @@
 'use client';
-import { EMAIL, nickname, PASSWORD } from '@/constants/signUp';
+import { EMAIL, NICKNAME, PASSWORD } from '@/constants/signUp';
 import { useSignUpSchema } from '@/hooks/useSignUpSchema';
 import { signUpSupabase } from '@/services/signUpSupabase';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,7 +26,7 @@ const SignUpPage = () => {
       alert('회원가입에 실패했습니다.');
     } else {
       alert('회원가입이 성공적으로 완료되었습니다!');
-      router.push('/sign-in');
+      router.push('/sign-in'); //TODO - 자동 로그인 구현
     }
   };
   return (
@@ -51,7 +51,7 @@ const SignUpPage = () => {
           </div>
           <div className='flex flex-col gap-2'>
             <label>닉네임</label>
-            <input {...register(nickname)} className='bg-orange-100 text-black' placeholder='닉네임을 입력해주세요' />
+            <input {...register(NICKNAME)} className='bg-orange-100 text-black' placeholder='닉네임을 입력해주세요' />
             {formState.errors.nickname && <span>{formState.errors.nickname.message}</span>}
           </div>
           <button disabled={!formState.isValid} type='submit'>
