@@ -14,6 +14,10 @@ import BookmarkBtn from '@/components/detail/BookmarkBtn';
 import { getIsBookmark } from '@/services/detail/serviceBookmarks';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { useAuthStore } from '@/store/useAuthStore';
+import Loading from '@/app/loading';
+import NotFound from '@/app/not-found';
+import { openAlert } from '@/lib/openAlert';
+import { ALERT_TYPE } from '@/constants/alertType';
 
 interface Props {
   params: {
@@ -22,11 +26,13 @@ interface Props {
 }
 
 const DetailPage = ({ params }: Props) => {
-  const [movie, setMovie] = useState<DetailMovie | null>(null);
+  const [movie, setMovie] = useState<DetailMovie>();
   const [src, setSrc] = useState<string>('');
   const [videoLink, setVideoLink] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [isBookmarked, setBookmarked] = useState(false);
+  const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { isSignedIn, user } = useAuthStore();
 
@@ -51,27 +57,38 @@ const DetailPage = ({ params }: Props) => {
 
   useEffect(() => {
     const dataFetch = async () => {
-      const [_movie, _videoLink, _comments, _isBookmarked] = await Promise.all([
-        getMovieDetails(params.id),
-        getMovieVideo(params.id),
-        getMovieComments(params.id),
-        isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
-      ]);
+      try {
+        const [_movie, _videoLink, _comments, _isBookmarked] = await Promise.all([
+          getMovieDetails(params.id),
+          getMovieVideo(params.id),
+          getMovieComments(params.id),
+          isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
+        ]);
 
-      if (_movie.poster_path) {
-        setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
+        if (_movie.poster_path) {
+          setSrc(`${TMDB_IMG_URL}/t/p/w300/${_movie.poster_path}`);
+        }
+
+        setMovie(_movie);
+        setVideoLink(_videoLink);
+        setComments(_comments);
+        setBookmarked(_isBookmarked);
+      } catch (e: Error | any) {
+        setError(true);
+        setErrorMessage(e.message);
       }
-
-      setMovie(_movie);
-      setVideoLink(_videoLink);
-      setComments(_comments);
-      setBookmarked(_isBookmarked);
     };
     dataFetch();
   }, []);
 
+  if (isError) {
+    const { ERROR } = ALERT_TYPE;
+    openAlert({ type: ERROR, text: errorMessage });
+    return <NotFound />;
+  }
+
   if (!movie) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -82,7 +99,7 @@ const DetailPage = ({ params }: Props) => {
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
       {isSignedIn && <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />}
-      <Info movie={movie} />
+      {movie && <Info movie={movie} />}
       {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
       {isSignedIn && <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />}
     </section>
