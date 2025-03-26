@@ -6,10 +6,11 @@ import { insertMovieComment } from '@/services/detail/serviceComments';
 import { useAuthStore } from '@/store/useAuthStore';
 import { openAlert } from '@/lib/openAlert';
 import { ALERT_TYPE } from '@/constants/alertType';
+import { Comment } from '@/types/Comment';
 
 interface Props {
   movie_id: number;
-  onSubmit: Function;
+  onSubmit: (comment: Comment) => void;
 }
 
 const InputComment = ({ movie_id, onSubmit }: Props) => {
