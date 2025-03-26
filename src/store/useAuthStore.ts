@@ -34,7 +34,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     const userData = await checkSession();
 
     if (userData) {
-      set({ isSignedIn: true, user: { email, nickname: userData.nickname } }); //유효할 때 유저 정보
+      set({ isSignedIn: true, user: { email, nickname: userData.nickname, id: userData.id } }); //유효할 때 유저 정보
     } else {
       set({ isSignedIn: false, user: null }); //유효하지 않을 때 로그아웃
     }
