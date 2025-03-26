@@ -15,7 +15,7 @@ interface Props {
 const InputComment = ({ movie_id, onSubmit }: Props) => {
   const [content, setContent] = useState<string>('');
   const { user } = useAuthStore();
-  const { ERROR, SUCCESS, INFO, WARNING } = ALERT_TYPE;
+  const { ERROR, SUCCESS } = ALERT_TYPE;
 
   const handleInsertComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
