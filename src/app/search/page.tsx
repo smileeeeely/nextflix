@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import noImage from '@images/images/noImage.png';
-import { IMG_BASE_URL } from '@/constants/movieCategory';
+import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 
 const SearchPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -38,7 +38,7 @@ const SearchPage = () => {
                 <div className='w-40 cursor-pointer'>
                   {movie.poster_path ? (
                     <Image
-                      src={`${IMG_BASE_URL}t/p/w300${movie.poster_path}`}
+                      src={`${TMDB_IMG_URL}t/p/w300${movie.poster_path}`}
                       alt={movie.title}
                       width={150}
                       height={225}
