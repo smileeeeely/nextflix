@@ -5,9 +5,9 @@ const { ERROR, SUCCESS, INFO, WARNING } = ALERT_TYPE;
 
 interface Props {
   type: 'success' | 'error' | 'info' | 'warning';
-  title: string;
-  text: string;
-  buttonText: string;
+  title?: string;
+  text?: string;
+  buttonText?: string;
 }
 
 export const openAlert = ({ type, title = '', text = '', buttonText = '' }: Props) => {
