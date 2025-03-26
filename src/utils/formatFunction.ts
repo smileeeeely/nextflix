@@ -27,3 +27,7 @@ export const formatDateSimple = (dateInput: string | Date): string => {
     day: 'numeric',
   });
 };
+
+export const containsOnlyNumbers = (input: number): boolean => {
+  return /^\d+$/.test(String(input));
+};
