@@ -14,7 +14,7 @@ interface Props {
 
 const MovieComments = ({ comments, onDelete }: Props) => {
   const { isSignedIn, user } = useAuthStore();
-  const { ERROR, SUCCESS, INFO, WARNING } = ALERT_TYPE;
+  const { ERROR, INFO, WARNING } = ALERT_TYPE;
 
   const handleDeleteComment = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
