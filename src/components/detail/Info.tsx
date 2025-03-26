@@ -1,4 +1,4 @@
-import { Movie } from '@/types/DetailMovie';
+import { DetailMovie } from '@/types/DetailMovie';
 import { formatOverview } from '@/utils/formatFunction';
 import Image from 'next/image';
 import WrapperBox from '@/components/detail/WrapperBox';
@@ -6,7 +6,7 @@ import WrapperBox from '@/components/detail/WrapperBox';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 
 interface Props {
-  movie: Movie;
+  movie: DetailMovie;
 }
 
 const Info = ({ movie }: Props) => {
