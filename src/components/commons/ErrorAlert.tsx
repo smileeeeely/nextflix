@@ -2,7 +2,6 @@ import { ALERT_TYPE } from '@/constants/alertType';
 import { openAlert } from '@/lib/openAlert';
 import { useEffect } from 'react';
 import { TriangleAlert } from 'lucide-react';
-import { boolean, string } from 'zod';
 
 const { ERROR } = ALERT_TYPE;
 
