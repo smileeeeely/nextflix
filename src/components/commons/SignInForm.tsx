@@ -1,6 +1,6 @@
 'use client';
 
-import { signInSupabase, test } from '@/services/signIn';
+import { signInSupabase } from '@/services/signIn';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
