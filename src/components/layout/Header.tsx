@@ -5,6 +5,7 @@ import Link from 'next/link';
 import MoviesSearch from '@/components/layout/MoviesSearch';
 import CategoryDropdown from '@/components/layout/CategoryDropdown';
 import UserMenu from '@/components/layout/UserMenu';
+import Image from 'next/image';
 
 const Header = () => {
   return (
@@ -13,9 +14,11 @@ const Header = () => {
         {/* 로고, 카테고리 */}
         <section className='flex items-center gap-8 text-slate-50'>
           {/* 로고 */}
-          <Link href={'/home'}>
-            <h1 className='text-3xl font-bold'>Logo</h1>
-          </Link>
+          <h1>
+            <Link href={'/home'}>
+              <Image src='/images/logo.png' alt='NextFlix' width={100} height={35} className='object-cover' />
+            </Link>
+          </h1>
 
           {/* 카테고리 메뉴 컴포넌트 */}
           <CategoryDropdown />

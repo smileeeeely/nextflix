@@ -13,9 +13,9 @@ const UserMenu = () => {
       {isSignedIn && user ? (
         // 로그인 상태 , 컴포넌트 들어갈 부분
         <div className='group relative inline-block'>
-          <button className='whitespace-nowrap font-semibold hover:text-red-500'>{user.nickname}님</button>
-          <div className='invisible absolute right-0 top-full z-10 mt-2 w-40 rounded-md border border-gray-200 bg-white opacity-0 shadow transition-all group-hover:visible group-hover:opacity-100'>
-            <ul className='py-2 text-slate-900'>
+          <button className='whitespace-nowrap font-semibold hover:text-[#e6354f]'>{user.nickname}님</button>
+          <div className='invisible absolute right-0 top-full z-10 mt-1 w-40 rounded-md border border-gray-200 bg-white opacity-0 shadow transition-all duration-200 group-hover:visible group-hover:opacity-100'>
+            <ul className='py-2 text-base font-semibold text-slate-900'>
               <li>
                 <Link href='/mypage' className='block px-4 py-2 hover:bg-gray-100'>
                   마이페이지
