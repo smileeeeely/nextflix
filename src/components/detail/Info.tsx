@@ -10,7 +10,7 @@ interface Props {
 
 const Info = ({ movie }: Props) => {
   return (
-    <section className='ml-[20px] flex flex-col'>
+    <section className='flex flex-col'>
       {/* 한 줄 평 */}
       {movie.tagline && <header className='text-center text-[40px] italic'>"{movie.tagline}"</header>}
       {/* 영화 이름 & 장르 내용 */}
