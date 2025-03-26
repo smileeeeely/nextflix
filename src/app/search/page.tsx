@@ -1,31 +1,51 @@
 'use client';
-import { Movie } from '@/types/Movie';
-import { fetchSearchMovies } from '@/services/searchMovie';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useSearchMovies } from '@/services/searchMovie';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import noImage from '@images/images/noImage.png';
-import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
+import { Movie } from '@/types/Movie';
+import { useInView } from 'react-intersection-observer';
+import MovieCard from '@/components/commons/MovieCard';
+import { ALERT_TYPE } from '@/constants/alertType';
+import { openAlert } from '@/lib/openAlert';
 
 const SearchPage = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const params = useSearchParams();
-  const input: string | null = params.get('title');
+  const [searchInput, setSearchInput] = useState<string>('');
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [ref, inView] = useInView({ threshold: 0 });
 
   // 들어온 검색값이 없을 경우
-  if (!input) return alert('검색 값을 정확히 입력해 주세요');
-
   useEffect(() => {
-    const fetchMovies = async () => {
-      const data: Movie[] = await fetchSearchMovies(input);
-      setMovies(data);
-    };
-    fetchMovies();
-  }, [input]);
+    const input = params.get('title');
+    if (!input) {
+      const { ERROR } = ALERT_TYPE;
+      openAlert({ type: ERROR, text: '검색 값을 정확히 입력해 주세요' });
+      return;
+    }
+    setSearchInput(input);
+  }, [params, searchInput]);
 
-  if (!movies) {
-    return <div>로딩중...</div>;
+  // 검색어에 따른 데이터 가져오기
+  const { data, isPending, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useSearchMovies({ searchInput });
+  useEffect(() => {
+    if (data?.pages) {
+      const movies = data.pages.flatMap((page) => page.results);
+      setMovies(movies);
+    }
+  }, [data]);
+
+  // 스크롤이 바닥에 닿은 경우 다음 페이지 가져오기
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isPending) {
+    return <div>데이터 불러오는 중...</div>;
+  }
+  if (isError) {
+    return <div>페이지에 문제가 생겼습니다</div>;
   }
 
   return (
@@ -33,45 +53,14 @@ const SearchPage = () => {
       <ul className='grid grid-cols-6 gap-4'>
         {movies.map((movie) => {
           return (
-            <li key={movie.id}>
-              <Link href={`/detail/${movie.id}`}>
-                <div className='w-40 cursor-pointer'>
-                  {movie.poster_path ? (
-                    <Image
-                      src={`${TMDB_IMG_URL}/t/p/w300${movie.poster_path}`}
-                      alt={movie.title}
-                      width={150}
-                      height={225}
-                      className='rounded-md'
-                    />
-                  ) : (
-                    <div className='relative cursor-pointer' style={{ aspectRatio: '2/3' }}>
-                      <Image
-                        src={noImage}
-                        alt='noImage'
-                        fill
-                        sizes='(max-width: 640px) 100vw, 20vw'
-                        className='rounded-md object-cover'
-                      />
-                    </div>
-                  )}
-                  <p>{movie.vote_average.toFixed(1)}</p>
-                </div>
-              </Link>
-              <h3 className='mt-2 text-base font-semibold'>{movie.title}</h3>
-              <p className='text-sm text-gray-400'>
-                {new Date(movie.release_date).toLocaleDateString('ko-KR', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-            </li>
+            <div key={movie.id} className='mx-auto w-40 place-content-center'>
+              <MovieCard movie={movie} />
+            </div>
           );
         })}
       </ul>
+      <div ref={ref}>{isFetchingNextPage && <div>데이터 불러오는 중...</div>}</div>
     </div>
   );
 };
-
 export default SearchPage;

@@ -1,11 +1,14 @@
+import { API_LANGUAGE } from '@/constants/movieCategory';
+import { TMDB_SEARCH_URL } from '@/constants/tmdbBaseUrl';
 import { NextResponse } from 'next/server';
 
 // 영화 검색 api에 연결된 라우트 핸들러
 export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const input: string | null = searchParams.get('title');
+  const page: string | null = searchParams.get('page');
 
-  const FETCH_URL = `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=ko-KOR&page=1`;
+  const FETCH_URL = `${TMDB_SEARCH_URL}?query=${input}&include_adult=false&language=${API_LANGUAGE}&page=${page}`;
   try {
     const res = await fetch(FETCH_URL, {
       //겹치는 부분. 추후 리팩토링으로 병합

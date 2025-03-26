@@ -2,6 +2,7 @@ import './globals.css';
 import HeaderLayout from './HeaderLayout';
 import FooterLayout from './FooterLayout';
 import AppLayout from '@/components/appLayout';
+import Provider from '@/app/Provider';
 import useAuthListener from '@/hooks/useAuthListener';
 
 export default function RootLayout({
@@ -15,9 +16,11 @@ export default function RootLayout({
     <html lang='ko'>
       <body className={`antialiased`}>
         <HeaderLayout />
-        <AppLayout>
-          <main className='mx-auto max-w-[1200px]'>{children}</main>
-        </AppLayout>
+        <Provider>
+          <AppLayout>
+            <main className='mx-auto max-w-[1200px]'>{children}</main>
+          </AppLayout>
+        </Provider>
         <FooterLayout />
       </body>
     </html>

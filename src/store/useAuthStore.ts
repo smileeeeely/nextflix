@@ -11,7 +11,7 @@ interface AuthState {
 interface User {
   email: string;
   nickname: string;
-  id: number;
+  id: string;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
