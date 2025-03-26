@@ -1,3 +1,4 @@
+import { getUserByEmail } from '@/utils/supabaseUser';
 import { create } from 'zustand';
 
 interface AuthState {
@@ -7,13 +8,18 @@ interface AuthState {
   logout: () => void;
 }
 
-type User = {
+interface User {
   email: string;
-};
+  nickname: string;
+}
 
 export const useAuthStore = create<AuthState>((set) => ({
   isSignedIn: false,
   user: null,
-  signIn: (email: string) => set({ isSignedIn: true, user: { email } }), // 로그인 한 유저 정보 담음 (nickname으로 변경?)
+  signIn: async (email) => {
+    const userData = await getUserByEmail(email);
+    if (!userData) return;
+    set({ isSignedIn: true, user: { email, nickname: userData.nickname } }); //로그인 한 유저 정보 담음
+  },
   logout: () => set({ isSignedIn: false, user: null }),
 }));
