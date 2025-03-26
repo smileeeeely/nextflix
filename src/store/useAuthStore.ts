@@ -25,6 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   // 로그아웃 함수
   logout: async () => {
     await logOutSupabase();
+    localStorage.removeItem('auth_token'); //로그아웃 시 로컬스토리지 토큰 삭제
     set({ isSignedIn: false, user: null });
   },
   // 토근 유효 검증 함수
