@@ -2,16 +2,13 @@
 
 import { YOUTUBE_BASE_URL } from '@/constants/movieVideoUrl';
 import { TMDB_BASE_URL } from '@/constants/tmdbBaseUrl';
-import { DetailMovie, ErrorMessage } from '@/types/DetailMovie';
+import { DetailMovie } from '@/types/DetailMovie';
 import { MovieVideos } from '@/types/Video';
 import { containsOnlyNumbers } from '@/utils/formatFunction';
 
 export const getMovieDetails = async (id: number): Promise<DetailMovie> => {
   if (!containsOnlyNumbers(id)) {
-    throw {
-      success: false,
-      status_message: 'movie_id 오류',
-    } as ErrorMessage;
+    throw new Error('movie id 오류!');
   }
 
   const res = await fetch(`${TMDB_BASE_URL}/${id}?language=ko`, {
@@ -24,7 +21,7 @@ export const getMovieDetails = async (id: number): Promise<DetailMovie> => {
 
   const data = await res.json();
   if (res.status !== 200) {
-    throw data as ErrorMessage;
+    throw new Error('서버 요청 오류!');
   }
 
   return data as DetailMovie;
@@ -40,9 +37,7 @@ export const getMovieVideo = async (id: number): Promise<string | null> => {
   });
 
   if (res.status !== 200) {
-    throw {
-      success: false,
-    } as ErrorMessage;
+    throw new Error('서버 요청 오류!');
   }
   const data: MovieVideos = await res.json();
 

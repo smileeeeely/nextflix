@@ -1,7 +1,6 @@
 'use server';
 
 import { Comment } from '@/types/Comment';
-import { ErrorMessage } from '@/types/DetailMovie';
 import { supabase } from '@/utils/supabaseClient';
 
 export const getMovieComments = async (movieId: number): Promise<Comment[] | null> => {
@@ -15,9 +14,7 @@ export const getMovieComments = async (movieId: number): Promise<Comment[] | nul
     .eq('movie_id', movieId);
 
   if (error) {
-    throw {
-      success: false,
-    } as ErrorMessage;
+    throw new Error('서버 요청 오류!');
   }
 
   return comments;

@@ -1,15 +1,12 @@
 'use server';
 
-import { ErrorMessage } from '@/types/DetailMovie';
 import { supabase } from '@/utils/supabaseClient';
 
 export const getIsBookmark = async ({ movie_id, user_id }: { movie_id: number; user_id: string }): Promise<boolean> => {
   const { data: bookmarks, error } = await supabase.from('bookmarks').select().eq('user_id', user_id);
 
   if (error) {
-    throw {
-      success: false,
-    } as ErrorMessage;
+    throw new Error('서버 요청 오류!');
   }
 
   for (const bookmark of bookmarks) {

@@ -4,7 +4,7 @@ import Poster from '@/components/detail/Poster';
 import Info from '@/components/detail/Info';
 import { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieVideo } from '@/services/serviceMovieDetails';
-import { DetailMovie, ErrorMessage } from '@/types/DetailMovie';
+import { DetailMovie } from '@/types/DetailMovie';
 import LinkBtn from '@/components/detail/LinkBtn';
 import { getMovieComments } from '@/services/detail/serviceComments';
 import { Comment } from '@/types/Comment';
@@ -32,6 +32,7 @@ const DetailPage = ({ params }: Props) => {
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [isBookmarked, setBookmarked] = useState(false);
   const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { isSignedIn, user } = useAuthStore();
 
@@ -72,8 +73,9 @@ const DetailPage = ({ params }: Props) => {
         setVideoLink(_videoLink);
         setComments(_comments);
         setBookmarked(_isBookmarked);
-      } catch (e) {
+      } catch (e: Error | any) {
         setError(true);
+        setErrorMessage(e.message);
       }
     };
     dataFetch();
@@ -81,7 +83,7 @@ const DetailPage = ({ params }: Props) => {
 
   if (isError) {
     const { ERROR } = ALERT_TYPE;
-    openAlert({ type: ERROR, text: '서버 요청 오류' });
+    openAlert({ type: ERROR, text: errorMessage });
     return <NotFound />;
   }
 
