@@ -83,7 +83,7 @@ const DetailPage = ({ params }: Props) => {
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
       {isSignedIn && <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />}
-      <Info movie={movie} />
+      {movie && <Info movie={movie} />}
       {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
       {isSignedIn && <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />}
     </section>
