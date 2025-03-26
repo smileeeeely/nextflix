@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ScoreDonut from '@/components/commons/ScoreDonut';
 import { IMG_BASE_URL } from '@/constants/movieCategory';
-import { formatDate } from '@/utils/formatDate';
+import { formatDateSimple } from '@/utils/formatFunction';
 
 type MovieCardProps = {
   movie: Movie;
@@ -14,7 +14,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   //무비카드 컴포넌트 사용시 .map()을 사용하는 로직에서 key 속성을 넣어주는 태그에 w-40 넣어주어야 비율대로 포스터가 나타납니다.
 
   // yyyy년 m월 d일 형식의 날짜 포멧팅
-  const formattedDate = formatDate(movie.release_date);
+  const formattedDate = formatDateSimple(movie.release_date);
 
   return (
     <Card>

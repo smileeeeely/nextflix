@@ -4,7 +4,7 @@ export const formatOverview = (overview: string): string => {
 };
 
 // timestamp를 기준으로 날짜 포멧팅
-export const formatDate = (createAt: string): string => {
+export const formatDateFull = (createAt: string): string => {
   const date = new Date(createAt);
 
   if (isNaN(date.getTime())) return '';
@@ -16,4 +16,14 @@ export const formatDate = (createAt: string): string => {
   const min = date.getMinutes();
 
   return `${year}년 ${month}월 ${day}일 ${hour}시 ${min}분`;
+};
+
+// yyyy년 m월 d일 형식의 날짜 포멧팅
+export const formatDateSimple = (dateInput: string | Date): string => {
+  const date = new Date(dateInput);
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 };
