@@ -12,6 +12,7 @@ import { Comment } from '@/types/Comment';
 import MovieComments from '@/components/detail/MovieComments';
 import InputComment from '@/components/detail/InputComment';
 import BookmarkBtn from '@/components/detail/BookmarkBtn';
+import { getIsBookmark } from '@/services/detail/serviceBookmarks';
 
 interface Props {
   params: {
@@ -24,6 +25,7 @@ const DetailPage = ({ params }: Props) => {
   const [src, setSrc] = useState<string>('');
   const [videoLink, setVideoLink] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[] | null>(null);
+  const [isBookmarked, setBookmarked] = useState(false);
 
   const mok_user = {
     nickname: 'test1',
@@ -45,12 +47,18 @@ const DetailPage = ({ params }: Props) => {
     setComments((prev) => (prev ? prev.filter((comment) => comment.id !== commentId) : []));
   };
 
+  // Bookmark handler
+  const onClickedHandler = () => {
+    setBookmarked((prev) => !prev);
+  };
+
   useEffect(() => {
     const dataFetch = async () => {
-      const [_movie, _videoLink, _comments] = await Promise.all([
+      const [_movie, _videoLink, _comments, _isBookmarked] = await Promise.all([
         getMovieDetails(params.id),
         getMovieVideo(params.id),
         getMovieComments(params.id),
+        getIsBookmark({ movie_id: params.id, user_id: mok_user.id }),
       ]);
 
       if (_movie.poster_path) {
@@ -60,6 +68,7 @@ const DetailPage = ({ params }: Props) => {
       setMovie(_movie);
       setVideoLink(_videoLink);
       setComments(_comments);
+      setBookmarked(_isBookmarked);
     };
     dataFetch();
   }, []);
@@ -75,7 +84,7 @@ const DetailPage = ({ params }: Props) => {
         {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
         {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
       </section>
-      <BookmarkBtn />
+      <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />
       <Info movie={movie} />
       {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
       <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />
