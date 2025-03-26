@@ -55,8 +55,7 @@ const DetailPage = ({ params }: Props) => {
         getMovieDetails(params.id),
         getMovieVideo(params.id),
         getMovieComments(params.id),
-        // TODO: user id가 추가되면 수정
-        isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: 'user.id' }) : false,
+        isSignedIn ? getIsBookmark({ movie_id: params.id, user_id: user!.id }) : false,
       ]);
 
       if (_movie.poster_path) {

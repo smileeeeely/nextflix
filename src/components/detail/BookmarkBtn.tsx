@@ -13,14 +13,13 @@ const BookmarkBtn = ({ isBookmarked, onClick, movie_id }: Props) => {
 
   const handleIsBookmark = async () => {
     // TODO: alert 처리 필요
-    // TODO: user id 변경
     // 북마킹 되어있을 시
     if (isBookmarked) {
-      await deleteMovieBookmark({ movie_id, user_id: 'user.id' });
+      await deleteMovieBookmark({ movie_id, user_id: user!.id });
     }
     // 북마킹이 안되어있을 시
     else {
-      await insertMovieBookmark({ movie_id, user_id: 'user.id' });
+      await insertMovieBookmark({ movie_id, user_id: user!.id });
     }
     onClick();
   };

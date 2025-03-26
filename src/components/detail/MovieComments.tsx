@@ -28,8 +28,7 @@ const MovieComments = ({ comments, onDelete }: Props) => {
             <p className='flex justify-end'>
               {comment.users?.nickname} · {formatDateFull(comment.created_at)}
             </p>
-            {/* TODO: user id 설정  */}
-            {isSignedIn && comment.user_id === 'user.id' ? (
+            {isSignedIn && comment.user_id === user!.id ? (
               <div className='mt-[10px] flex justify-end'>
                 <Button value={comment.id} onClick={handleDeleteComment} className='h-[25px] hover:bg-[#e6354f]'>
                   삭제

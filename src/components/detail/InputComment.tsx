@@ -16,8 +16,7 @@ const InputComment = ({ movie_id, onSubmit }: Props) => {
 
   const handleInsertComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: user id 설정
-    const comment = await insertMovieComment({ user_id: 'user.id', content, movie_id });
+    const comment = await insertMovieComment({ user_id: user!.id, content, movie_id });
     if (comment) {
       onSubmit(comment);
       setContent('');
