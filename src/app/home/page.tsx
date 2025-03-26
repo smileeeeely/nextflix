@@ -1,8 +1,9 @@
-import CategorySection from '@/components/home/CategorySection';
-import { getMovies } from '@/services/movieCategory';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import CategorySection from '@/components/home/CategorySection';
+import { getMovies } from '@/services/movieCategory';
 import SkeletoneList from '@/components/home/SkeletoneList';
+import { CATEGORY } from '@/constants/movieCategory';
 
 export const metadata: Metadata = {
   title: '카테고리별 영화목록',
@@ -10,18 +11,18 @@ export const metadata: Metadata = {
 };
 
 // 카테고리를 타입 정의
-interface Category {
+interface CategoryAlias {
   name: string;
-  key: 'now_playing' | 'popular' | 'top_rated' | 'upcoming';
+  key: CATEGORY;
 }
 
 const Category = async () => {
   // API 호출 순서를 배열로 정의
-  const categories: Category[] = [
-    { name: '지금 상영중', key: 'now_playing' },
-    { name: '인기순', key: 'popular' },
-    { name: '평점순', key: 'top_rated' },
-    { name: '개봉 예정작', key: 'upcoming' },
+  const categories: CategoryAlias[] = [
+    { name: '지금 상영중', key: CATEGORY.NOW_PLAYING },
+    { name: '인기순', key: CATEGORY.POPULAR },
+    { name: '평점순', key: CATEGORY.TOP_RATED },
+    { name: '개봉 예정작', key: CATEGORY.UPCOMING },
   ];
 
   // Promise.allSettled로 병렬 처리

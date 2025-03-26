@@ -1,7 +1,6 @@
 import PageNationBtn from '@/components/pageNationBtn';
 import { Movie } from '@/types/Movie';
 import { getNowPlaying } from '@/services/category/serverApi';
-import React from 'react';
 import MovieCard from '@/components/commons/MovieCard';
 
 // 서버 컴포넌트에서 쿼리 파라미터 가져오기
