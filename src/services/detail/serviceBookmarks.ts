@@ -25,7 +25,7 @@ export const insertMovieBookmark = async ({
   movie_id: number;
   user_id: string;
 }): Promise<boolean> => {
-  const { data: bookmark, error } = await supabase.from('bookmarks').insert({ user_id, movie_id }).select();
+  const { error } = await supabase.from('bookmarks').insert({ user_id, movie_id }).select();
 
   if (error) {
     throw new Error('데이터 베이스 오류 : 북마크 INSERT');
@@ -41,7 +41,7 @@ export const deleteMovieBookmark = async ({
   movie_id: number;
   user_id: string;
 }): Promise<boolean> => {
-  const { data: bookmark, error } = await supabase.from('bookmarks').delete().match({ user_id, movie_id });
+  const { error } = await supabase.from('bookmarks').delete().match({ user_id, movie_id });
 
   if (error) {
     throw new Error('데이터 베이스 오류 : 북마크 DELETE');

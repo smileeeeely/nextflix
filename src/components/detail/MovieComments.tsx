@@ -9,7 +9,7 @@ import { openAlert } from '@/lib/openAlert';
 
 interface Props {
   comments: Comment[];
-  onDelete: Function;
+  onDelete: (commentId: string) => void;
 }
 
 const MovieComments = ({ comments, onDelete }: Props) => {

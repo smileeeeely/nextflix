@@ -40,7 +40,11 @@ export const checkSession = async () => {
   const { data } = await supabase.auth.getSession();
   if (data?.session) {
     const email = data.session.user.email;
-    const { data: userData, error } = await supabase.from('users').select('email').eq('email', email).single();
+    const { data: userData, error } = await supabase
+      .from('users')
+      .select('id, nickname, email')
+      .eq('email', email)
+      .single();
 
     if (error) {
       console.log('유저 조회 실패', error.message);
