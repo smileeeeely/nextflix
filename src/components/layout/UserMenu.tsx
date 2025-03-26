@@ -8,6 +8,7 @@ const UserMenu = () => {
   const { user } = useAuthStore();
   const { isSignedIn } = useAuthStore();
   const { logout } = useAuthStore();
+
   return (
     <div className='flex items-center gap-6 text-slate-50'>
       {isSignedIn && user ? (
@@ -17,7 +18,7 @@ const UserMenu = () => {
           <div className='invisible absolute right-0 top-full z-10 mt-1 w-40 rounded-md border border-gray-200 bg-white opacity-0 shadow transition-all duration-200 group-hover:visible group-hover:opacity-100'>
             <ul className='py-2 text-base font-semibold text-slate-900'>
               <li>
-                <Link href='/mypage' className='block px-4 py-2 hover:bg-gray-100'>
+                <Link href='/my-page' className='block px-4 py-2 hover:bg-gray-100'>
                   마이페이지
                 </Link>
               </li>
