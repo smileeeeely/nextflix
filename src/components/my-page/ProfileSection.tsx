@@ -54,7 +54,7 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
               <Button type='submit' className='bg-black text-white'>
                 수정 완료
               </Button>
-              <Button type='submit' onClick={toggleEdit}>
+              <Button type='button' onClick={toggleEdit}>
                 취소
               </Button>
             </div>
