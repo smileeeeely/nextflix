@@ -1,9 +1,16 @@
-import SignInForm from '@/components/commons/SignInForm';
+import SignInForm from '@/components/sign-in/SignInForm';
 import { HOME, SIGNUP } from '@/constants/pagePath';
 import { checkSession } from '@/services/signIn';
+import { Metadata } from 'next';
 
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import React from 'react';
+
+export const metadata: Metadata = {
+  title: '로그인',
+  description: '로그인 페이지입니다.',
+};
 
 const signInPage = async () => {
   const userData = await checkSession();
