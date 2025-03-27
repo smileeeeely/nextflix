@@ -4,7 +4,7 @@ interface Children {
 
 const WrapperBox = ({ children }: Readonly<Children>) => {
   return (
-    <section className='mx-[40px] mb-[20px] rounded-lg border-[4px] border-gray-400 bg-gray-200 px-[20px] py-[10px] shadow-lg'>
+    <section className='mb-[20px] rounded-lg border border-gray-400 bg-gray-200 px-5 py-4 shadow-lg'>
       {children}
     </section>
   );
