@@ -6,6 +6,8 @@ import MoviesSearch from '@/components/layout/MoviesSearch';
 import CategoryDropdown from '@/components/layout/CategoryDropdown';
 import UserMenu from '@/components/layout/UserMenu';
 import Image from 'next/image';
+import logo from '@images/images/logo.png';
+import { HOME } from '@/constants/pagePath';
 
 const Header = () => {
   return (
@@ -15,8 +17,8 @@ const Header = () => {
         <section className='flex items-center gap-8 text-slate-50'>
           {/* 로고 */}
           <h1>
-            <Link href={'/home'}>
-              <Image src='/images/logo.png' alt='NextFlix' width={50} height={35} className='object-cover' />
+            <Link href={HOME}>
+              <Image src={logo} alt='NextFlix' width={50} height={35} className='object-cover' />
             </Link>
           </h1>
 
