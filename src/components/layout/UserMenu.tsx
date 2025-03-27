@@ -1,6 +1,7 @@
 'use client';
 
-import { MYPAGE } from '@/constants/pagePath';
+
+import { MYPAGE, SIGNIN } from '@/constants/pagePath';
 import { useAuthStore } from '@/store/useAuthStore';
 import Link from 'next/link';
 
@@ -32,7 +33,7 @@ const UserMenu = () => {
         </div>
       ) : (
         // 비로그인 상태
-        <Link href='/sign-in' className='whitespace-nowrap font-semibold hover:text-red-500'>
+        <Link href={SIGNIN} className='whitespace-nowrap font-semibold hover:text-red-500'>
           로그인
         </Link>
       )}
