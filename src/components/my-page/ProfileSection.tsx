@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { supabase } from '@/utils/supabaseClient';
 import { useAuthStore } from '@/store/useAuthStore';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 interface ProfileSectionProps {
   user: {
@@ -30,8 +32,7 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
     const { error } = await supabase.from('users').update({ nickname }).eq('id', user.id);
 
     if (error) {
-      console.error('닉네임 수정 실패:', error.message);
-      return;
+      return <p>오류가 발생했습니다. 다시 시도해주세요!</p>;
     }
 
     useAuthStore.setState({ user: { ...user, nickname } });
@@ -39,30 +40,30 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
   };
 
   return (
-    <div className='flex justify-around'>
-      <div>
+    <div className='flex items-center justify-center p-4'>
+      <div className='rounded-md border border-slate-800 px-6 py-4'>
         {isEditing ? (
-          <form onSubmit={handleSave}>
-            <input
+          <form onSubmit={handleSave} className='flex flex-col items-center justify-center gap-4'>
+            <Input
               type='text'
-              className='border border-black outline-none'
+              className='w-36 border border-black outline-none'
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
             />
-            <button type='submit' className='bg-black text-white'>
-              수정 완료
-            </button>
-            <button type='button' onClick={toggleEdit} className='ml-2'>
-              취소
-            </button>
+            <div className='space-x-2'>
+              <Button type='submit' className='bg-black text-white'>
+                수정 완료
+              </Button>
+              <Button type='submit' onClick={toggleEdit}>
+                취소
+              </Button>
+            </div>
           </form>
         ) : (
-          <>
-            <p>닉네임: {user?.nickname || '닉네임 없음'}</p>
-            <button onClick={toggleEdit} className='bg-black text-white'>
-              프로필 수정
-            </button>
-          </>
+          <div className='flex flex-col items-center justify-center gap-4'>
+            <p className='text-xl font-semibold'>닉네임 : {user?.nickname || '닉네임 없음'}</p>
+            <Button onClick={toggleEdit}>프로필 수정</Button>
+          </div>
         )}
       </div>
     </div>
