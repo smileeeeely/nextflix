@@ -41,7 +41,6 @@ const BookmarkBtn = ({ isBookmarked, onClick, movie_id }: Props) => {
           <Bookmark className='h-full w-full' />
         )}
       </button>
-      <p>북마크</p>
     </section>
   );
 };
