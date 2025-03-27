@@ -108,7 +108,7 @@ const DetailPage = ({ params }: Props) => {
         <section className='mt-10 flex items-center justify-center'>
           {/* 배경 영역 */}
           <div
-            className='absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-85'
+            className='absolute inset-0 -z-10 h-[800px] w-full bg-cover bg-center bg-no-repeat opacity-85'
             style={{
               backgroundImage: `url(${backdropSrc})`,
               backgroundSize: 'cover',
@@ -123,7 +123,7 @@ const DetailPage = ({ params }: Props) => {
             {/* 왼쪽 포스터 */}
             <div className='flex flex-col gap-8 md:flex-row'>
               {/* 포스터영역 */}
-              <div className='flex-shrink-0 self-center md:self-start'>
+              <div className='flex-shrink-0 self-center rounded-lg bg-slate-200 md:self-start'>
                 <Image
                   src={src}
                   width={300}
@@ -132,11 +132,12 @@ const DetailPage = ({ params }: Props) => {
                   className='shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]'
                 />
                 {/* 제작사 정보 */}
-                <div className='mt-[-12px] rounded-lg bg-slate-200 p-4'>
+                <div className='mt-[-12px] w-[300px] rounded-lg p-4'>
                   <h3 className='mt-3 text-lg font-bold'>제작사</h3>
                   <div className='mt-2 flex flex-wrap items-center gap-6'>
-                    {movie.production_companies.map((company) => (
-                      <div key={company.id} className=''>
+                    {/* 제작사는 최대 4개까지만 보이고 더있다면 ect...로 표기 */}
+                    {movie.production_companies.slice(0, 4).map((company) => (
+                      <div key={company.id}>
                         {company.logo_path ? (
                           <div className='flex flex-col items-center'>
                             <Image
@@ -152,6 +153,11 @@ const DetailPage = ({ params }: Props) => {
                         )}
                       </div>
                     ))}
+                    {movie.production_companies.length > 4 && (
+                      <div className='flex items-center justify-center'>
+                        <span>etc...</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -185,18 +191,28 @@ const DetailPage = ({ params }: Props) => {
                   <section className='flex items-center gap-[20px]'>
                     {videoLink && <LinkBtn link={videoLink} label='예고편 보러가기' />}
                     {movie?.homepage && <LinkBtn link={movie.homepage} label='영화 보러가기' />}
+                    {/* 북마크, 항상 보이지만 로그인 했을 시에만 저장 가능하게 하면 좋을듯 */}
+                    {isSignedIn && (
+                      <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />
+                    )}
                   </section>
-                  {/* 북마크, 항상 보이지만 로그인 했을 시에만 저장 가능하게 하면 좋을듯 */}
-                  {isSignedIn && (
-                    <BookmarkBtn onClick={onClickedHandler} isBookmarked={isBookmarked} movie_id={movie.id} />
-                  )}
                 </div>
 
                 {/* 슬로건, 줄거리 */}
                 <div>
                   <h4 className='mb-4 text-lg italic'>{movie.tagline}</h4>
                   <h3 className='text-2xl font-bold'>줄거리</h3>
-                  <p className='mt-2 whitespace-pre-line'>{formatOverview(movie.overview)}</p>
+                  <p
+                    style={{
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                      WebkitLineClamp: 10,
+                    }}
+                    className='mt-2 whitespace-pre-line'
+                  >
+                    {formatOverview(movie.overview)}
+                  </p>
                 </div>
               </section>
             </div>
@@ -205,7 +221,7 @@ const DetailPage = ({ params }: Props) => {
       </section>
 
       {/* 댓글 영역 */}
-      <section className='relative z-10 mx-auto mt-16 max-w-5xl px-4'>
+      <section className='relative top-[100px] mx-auto max-w-5xl px-4'>
         {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
         {isSignedIn && <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />}
       </section>
