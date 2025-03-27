@@ -2,7 +2,6 @@ import './globals.css';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import FooterLayout from '@/components/layout/FooterLayout';
 import Provider from '@/app/Provider';
-import useAuthListener from '@/hooks/useAuthListener';
 
 export const metadata = {
   title: 'NEXTFLIX',
@@ -17,8 +16,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // useAuthListener(); //로그인 상태 감지 훅
-
   return (
     <html lang='ko'>
       <body className={`antialiased`}>
