@@ -11,6 +11,7 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  'types': ['node'],
 };
 
 export default nextConfig;

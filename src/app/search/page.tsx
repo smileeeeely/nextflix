@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import MovieCard from '@/components/commons/MovieCard';
 import { ALERT_TYPE } from '@/constants/alertType';
 import { openAlert } from '@/lib/openAlert';
+import LoadingSpinner from '@/components/commons/LoadingSpinner';
 
 const SearchPage = () => {
   const params = useSearchParams();
@@ -42,7 +43,7 @@ const SearchPage = () => {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isPending) {
-    return <div>데이터 불러오는 중...</div>;
+    return <LoadingSpinner />;
   }
   if (isError) {
     return <div>페이지에 문제가 생겼습니다</div>;
@@ -50,7 +51,7 @@ const SearchPage = () => {
 
   return (
     <div className='w-full p-8'>
-      <ul className='grid grid-cols-6 gap-4'>
+      <ul className='category-grid'>
         {movies.map((movie) => {
           return (
             <div key={movie.id} className='mx-auto w-40 place-content-center'>
