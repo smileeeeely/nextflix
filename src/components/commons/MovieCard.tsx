@@ -6,6 +6,7 @@ import { formatDateSimple } from '@/utils/formatFunction';
 import { TMDB_IMG_URL } from '@/constants/tmdbBaseUrl';
 import { DetailMovie } from '@/types/DetailMovie';
 import { Movie } from '@/types/Movie';
+import noImage from '@images/images/noImage.png';
 
 type MovieCardProps = {
   movie: DetailMovie | Movie;
@@ -18,7 +19,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   const formattedDate = formatDateSimple(movie.release_date);
 
   // poster_path가 유효하지 않으면 noimage.png 사용
-  const posterSrc = movie.poster_path ? `${TMDB_IMG_URL}/t/p/w300${movie.poster_path}` : '/images/noImage.png';
+  const posterSrc = movie.poster_path ? `${TMDB_IMG_URL}/t/p/w300${movie.poster_path}` : noImage;
 
   return (
     <Card>

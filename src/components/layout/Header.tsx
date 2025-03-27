@@ -6,6 +6,7 @@ import MoviesSearch from '@/components/layout/MoviesSearch';
 import CategoryDropdown from '@/components/layout/CategoryDropdown';
 import UserMenu from '@/components/layout/UserMenu';
 import Image from 'next/image';
+import { HOME } from '@/constants/pagePath';
 
 const Header = () => {
   return (
@@ -16,7 +17,7 @@ const Header = () => {
           {/* 로고 크기 고정 */}
           <h1>
             <div className='relative h-[35px] w-[50px]'>
-              <Link href={'/home'}>
+              <Link href={HOME}>
                 <Image src='/images/logo.png' alt='NextFlix' fill className='object-cover' />
               </Link>
             </div>
