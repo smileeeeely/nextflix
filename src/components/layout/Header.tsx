@@ -6,6 +6,7 @@ import MoviesSearch from '@/components/layout/MoviesSearch';
 import CategoryDropdown from '@/components/layout/CategoryDropdown';
 import UserMenu from '@/components/layout/UserMenu';
 import Image from 'next/image';
+import logo from '@images/images/logo.png';
 
 const Header = () => {
   return (
@@ -16,7 +17,7 @@ const Header = () => {
           {/* 로고 */}
           <h1>
             <Link href={'/home'}>
-              <Image src='/images/logo.png' alt='NextFlix' width={50} height={35} className='object-cover' />
+              <Image src={logo} alt='NextFlix' width={50} height={35} className='object-cover' />
             </Link>
           </h1>
 
