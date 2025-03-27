@@ -27,7 +27,6 @@ const Category = async () => {
 
   // Promise.allSettled로 병렬 처리
   const results = await Promise.allSettled(categories.map((category) => getMovies(category.key)));
-
   // 각 카테고리별 성공/실패 결과 맵핑
   const categoryResults = categories.map((category, index) => {
     const result = results[index];
@@ -44,7 +43,6 @@ const Category = async () => {
       };
     }
   });
-
   return (
     <section>
       {categoryResults.map((category) => (
@@ -62,5 +60,4 @@ const Category = async () => {
     </section>
   );
 };
-
 export default Category;

@@ -1,12 +1,24 @@
-import PageNationBtn from '@/components/pageNationBtn';
-import { Movie } from '@/types/Movie';
+import PageNationBtn from '@/components/category/pageNationBtn';
+import { Movie, PaginatedResponse } from '@/types/Movie';
 import { getPopular } from '@/services/category/serverApi';
 import MovieCard from '@/components/commons/MovieCard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '인기 영화목록',
+  description: '인기 영화목록을 확인할 수 있습니다.',
+};
 
 // 서버 컴포넌트에서 쿼리 파라미터 가져오기
 const popularPage = async ({ params }: { params: { page: null | string } }) => {
   const page = parseInt(params.page || '1'); // 숫자로 변환
-  const data = await getPopular(page);
+  let data: PaginatedResponse<Movie> | null = null;
+  try {
+    data = await getPopular(page);
+  } catch (error) {
+    console.error('인기 영화를 불러오는 데 실패하였습니다.', error);
+    return <p className='text-center text-red-500'>영화 정보를 불러오는 데 실패했습니다.</p>;
+  }
   return (
     <article>
       <section>
