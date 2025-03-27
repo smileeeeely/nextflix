@@ -8,7 +8,7 @@ const MyPage = () => {
   const { user } = useAuthStore();
 
   return (
-    <div>
+    <div className='flex flex-col gap-20 p-4'>
       <ProfileSection user={user} />
       <BookmarkList userId={user?.id} />
     </div>
