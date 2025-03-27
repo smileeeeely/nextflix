@@ -1,8 +1,8 @@
 'use client';
 
+import { MYPAGE } from '@/constants/pagePath';
 import { useAuthStore } from '@/store/useAuthStore';
 import Link from 'next/link';
-import React from 'react';
 
 const UserMenu = () => {
   const { user } = useAuthStore();
@@ -18,7 +18,7 @@ const UserMenu = () => {
           <div className='invisible absolute right-0 top-full z-10 mt-1 w-40 rounded-md border border-gray-200 bg-white opacity-0 shadow transition-all duration-200 group-hover:visible group-hover:opacity-100'>
             <ul className='py-2 text-base font-semibold text-slate-900'>
               <li>
-                <Link href='/my-page' className='block px-4 py-2 hover:bg-gray-100'>
+                <Link href={MYPAGE} className='block px-4 py-2 hover:bg-gray-100'>
                   마이페이지
                 </Link>
               </li>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { HOME } from '@/constants/pagePath';
+import { EMAIL, PASSWORD } from '@/constants/signUp';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -31,11 +32,11 @@ const SignInForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='mx-auto w-[350px] rounded-lg bg-gray-200 p-5'>
       <div className='flex flex-col items-center'>
-        <label htmlFor='email' />
+        <label htmlFor={EMAIL} />
         <input
           className='m-3 w-[270px] rounded-md p-2'
-          type='email'
-          placeholder='email'
+          type={EMAIL}
+          placeholder={EMAIL}
           {...register('email', {
             required: { value: true, message: '아이디를 입력하세요' },
             pattern: {
@@ -47,11 +48,11 @@ const SignInForm = () => {
         {formState.errors.email && (
           <span className='text-[14px] font-semibold'>{formState.errors.email.message as string}</span>
         )}
-        <label htmlFor='password' />
+        <label htmlFor={PASSWORD} />
         <input
           className='m-3 w-[270px] rounded-md p-2'
-          type='password'
-          placeholder='password'
+          type={PASSWORD}
+          placeholder={PASSWORD}
           {...register('password', {
             required: { value: true, message: '비밀번호를 입력하세요' },
             pattern: {
