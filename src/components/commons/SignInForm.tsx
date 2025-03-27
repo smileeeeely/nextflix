@@ -50,7 +50,7 @@ const SignInForm = () => {
           className='m-3 w-[270px] rounded-md p-2'
           type={EMAIL}
           placeholder={EMAIL}
-          {...register('email', {
+          {...register(EMAIL, {
             required: { value: true, message: '아이디를 입력하세요' },
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -66,7 +66,7 @@ const SignInForm = () => {
           className='m-3 w-[270px] rounded-md p-2'
           type={PASSWORD}
           placeholder={PASSWORD}
-          {...register('password', {
+          {...register(PASSWORD, {
             required: { value: true, message: '비밀번호를 입력하세요' },
             pattern: {
               value: /^.{6,}$/,
