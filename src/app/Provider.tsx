@@ -1,6 +1,6 @@
 'use client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useAuthListener from '@/hooks/useAuthListener';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient();
