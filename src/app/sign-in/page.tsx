@@ -1,4 +1,4 @@
-import SignInForm from '@/components/sign-in/SignInForm';
+import SignInForm from '@/components/commons/SignInForm';
 import { HOME, SIGNUP } from '@/constants/pagePath';
 import { checkSession } from '@/services/signIn';
 import { Metadata } from 'next';
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const signInPage = async () => {
   const userData = await checkSession();
-
+  console.log('userData', userData);
   if (userData) {
     redirect(HOME);
   }

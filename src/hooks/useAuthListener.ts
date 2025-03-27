@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 // 세션 만료/로그아웃 시 로그인 페이지로 이동
-const useAuthListener = () => {
+const UseAuthListener = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const useAuthListener = () => {
   return null; //UI 렌더링 X
 };
 
-export default useAuthListener;
+export default UseAuthListener;
