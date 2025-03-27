@@ -154,16 +154,16 @@
     </tr>
     <tr>
       <td align="center">
-        핫플 리스트 설계 <br/>
-        북마크 페이지 구현 <br/>
+        영화 카테고리 페이지 <br/>
+        로그인 및 전역 인증 상태 관리 <br/>
       </td>
       <td align="center">
-        지도 API 연결 <br/>
-        지도 UI 구현 <br/>
+        Intro,Search,Sign-up 페이지 구현  <br/>
+        reactQuery 연결 및 설정 <br/>
       </td>
       <td align="center">
-        DB 설계 <br/>
-        ProtectedRouter 및 상태 관리 구현 <br/>
+        메인페이지 구현 <br/>
+        레이아웃 구현 <br/>
       </td>
     </tr>
     <tr>
@@ -186,8 +186,8 @@
     </tr>
     <tr>
       <td align="center">
-        헤더 구현 <br/>
-        유튜브 모달창 및 상세 정보 모달창 구현 <br/>
+        Header & Footer 구현 <br/>
+        프로필 및 북마크 관리 구현 <br/>
       </td>
       <td align="center">
         영화 Detail 페이지 구현 <br/>
