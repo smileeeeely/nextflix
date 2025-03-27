@@ -3,12 +3,12 @@
 import { MYPAGE, SIGNIN } from '@/constants/pagePath';
 import { useAuthStore } from '@/store/useAuthStore';
 import Link from 'next/link';
-import React from 'react';
 
 const UserMenu = () => {
   const { user } = useAuthStore();
   const { isSignedIn } = useAuthStore();
   const { logout } = useAuthStore();
+
   return (
     <div className='flex items-center gap-6 text-slate-50'>
       {isSignedIn && user ? (

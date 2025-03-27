@@ -22,7 +22,6 @@ export const signInSupabase = async ({ email, password }: SignInProps) => {
 // 유저 정보 가져오기 (nickname 포함)
 export const getUserByEmail = async (email: string) => {
   const { data, error } = await supabase.from('users').select('id, email, nickname').eq('email', email).single();
-  console.log('data', data);
   if (error) {
     console.error('유저 정보 조회 실패', error.message);
     return null;
