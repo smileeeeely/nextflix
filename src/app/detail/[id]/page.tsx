@@ -205,7 +205,7 @@ const DetailPage = ({ params }: Props) => {
       </section>
 
       {/* 댓글 영역 */}
-      <section className='relative z-10 mx-auto mt-10 max-w-5xl px-4'>
+      <section className='relative z-10 mx-auto mt-16 max-w-5xl px-4'>
         {comments && <MovieComments onDelete={onDeleteCommentsHandler} comments={comments} />}
         {isSignedIn && <InputComment onSubmit={onSubmitCommentsHandler} movie_id={movie.id} />}
       </section>
