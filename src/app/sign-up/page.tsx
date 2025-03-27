@@ -1,8 +1,10 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { ALERT_TYPE } from '@/constants/alertType';
 import { SIGNIN } from '@/constants/pagePath';
 import { EMAIL, NICKNAME, PASSWORD } from '@/constants/signUp';
 import { useSignUpSchema } from '@/hooks/useSignUpSchema';
+import { openAlert } from '@/lib/openAlert';
 import { signUpSupabase } from '@/services/signUpSupabase';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -11,6 +13,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 
 const SignUpPage = () => {
   const router = useRouter();
+  const { ERROR, SUCCESS } = ALERT_TYPE;
 
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
@@ -23,12 +26,13 @@ const SignUpPage = () => {
   });
 
   const onSubmit = async (value: FieldValues) => {
-    const result = await signUpSupabase(value);
-    if (!result) {
-      alert('회원가입에 실패했습니다.');
-    } else {
-      alert('회원가입이 성공적으로 완료되었습니다!');
-      router.push(SIGNIN); //TODO - 자동 로그인 구현
+    try {
+      await signUpSupabase(value);
+      openAlert({ type: SUCCESS, text: '회원가입이 성공적으로 완료되었습니다!' });
+      router.push(SIGNIN);
+    } catch (error) {
+      openAlert({ type: ERROR, text: '회원가입에 실패했습니다!' });
+      throw new Error('회원가입 실패');
     }
   };
   return (

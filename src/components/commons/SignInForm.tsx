@@ -19,6 +19,7 @@ const SignInForm = () => {
     try {
       const { email, password } = value;
       const data = await signInSupabase({ email, password }); //서버 액션 함수 호출
+
       if (data) {
         localStorage.setItem('auth_token', data.session.access_token); //로컬스토리지에 토큰 저장
         useAuthStore.getState().signIn(data.user.email as string); //로그인 상태 전역 업데이트
@@ -44,11 +45,11 @@ const SignInForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='mx-auto w-[350px] rounded-lg bg-gray-200 p-5'>
       <div className='flex flex-col items-center'>
-        <label htmlFor='email' />
+        <label htmlFor={EMAIL} />
         <input
           className='m-3 w-[270px] rounded-md p-2'
-          type='email'
-          placeholder='email'
+          type={EMAIL}
+          placeholder={EMAIL}
           {...register(EMAIL, {
             required: { value: true, message: '아이디를 입력하세요' },
             pattern: {
@@ -60,11 +61,11 @@ const SignInForm = () => {
         {formState.errors.email && (
           <span className='text-[14px] font-semibold'>{formState.errors.email.message as string}</span>
         )}
-        <label htmlFor='password' />
+        <label htmlFor={PASSWORD} />
         <input
           className='m-3 w-[270px] rounded-md p-2'
-          type='password'
-          placeholder='password'
+          type={PASSWORD}
+          placeholder={PASSWORD}
           {...register(PASSWORD, {
             required: { value: true, message: '비밀번호를 입력하세요' },
             pattern: {

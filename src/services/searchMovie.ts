@@ -12,6 +12,7 @@ export const fetchSearchMovies = async ({ input, page = PARAM_NUMBER }: { input:
   return data;
 };
 
+// 무한 스크롤 구현 로직
 export const useSearchMovies = ({ searchInput = '' }: { searchInput?: string }) => {
   return useInfiniteQuery<PaginatedResponse<Movie>, Error, InfiniteData<PaginatedResponse<Movie>>, string[], number>({
     queryKey: ['useSearchMovies', searchInput],
